@@ -299,7 +299,7 @@ myCat.name = 'Yankee';
  ```
 
 **Object.assign()**
-copies properties from one or more source objects to target object
+copies both string and Symbol properties from one or more source objects to target object
  
 ```javascript
 // example
