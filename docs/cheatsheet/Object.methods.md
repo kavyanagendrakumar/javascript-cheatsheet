@@ -401,7 +401,7 @@ Object.getOwnPropertyNames({ a: 1, b: 2 }) // [ "a", "b" ]
 Object.getOwnPropertyNames(obj)
 ```
 **Object.getOwnPropertySymbols()**
-array of all symbol properties
+returns array of all symbol properties
  
 ```javascript
 // example
