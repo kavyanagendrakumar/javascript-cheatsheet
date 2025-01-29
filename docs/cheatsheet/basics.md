@@ -32,6 +32,9 @@ JavaScript provides seven different data types:
 | `object`    | A collection of properties.                                           |
 | `symbol`    | Represents a unique identifier.                                       |
 
+## Cheatsheet 
+https://htmlcheatsheet.com/js/ 
+
 ## Variables
 
 You can declare variables using `var`, `let`, and `const` keywords. Here's what you need to know about each:
