@@ -13,6 +13,7 @@ const trainSchedule = {
 Dot Notation for Accessing Object Properties
 Properties of a JavaScript object can be accessed using the dot notation in this manner: object.propertyName. Nested properties of an object can be accessed by chaining key names in the correct order.
 
+```javascript
 const apple = { 
   color: 'Green',
   price: {
@@ -22,7 +23,9 @@ const apple = {
 };
 console.log(apple.color); // 'Green'
 console.log(apple.price.bulk); // '$3/kg'
-Objects
+```
+
+## Objects
 An object is a built-in data type for storing key-value pairs. Data inside objects are unordered, and the values can be of any type.
 
 Accessing non-existent JavaScript properties
@@ -38,7 +41,7 @@ JavaScript Objects are Mutable
 JavaScript objects are mutable, meaning their contents can be changed, even when they are declared as const. New properties can be added, and existing property values can be changed or deleted.
 
 It is the reference to the object, bound to the variable, that cannot be changed.
-
+```javascript
 const student = {
   name: 'Sheldon',
   score: 100,
@@ -70,18 +73,20 @@ let mobile = {
 for (let key in mobile) {
   console.log(`${key}: ${mobile[key]}`);
 }
+```
 Properties and values of a JavaScript object
 A JavaScript object literal is enclosed with curly braces {}. Values are mapped to keys in the object with a colon (:), and the key-value pairs are separated by commas. All the keys are unique, but values are not.
 
 Key-value pairs of an object are also referred to as properties.
-
+```javascript
 const classOf2018 = {
   students: 38,
   year: 2018
 }
+```
 Delete operator
 Once an object is created in JavaScript, it is possible to remove properties from the object using the delete operator. The delete keyword deletes both the value of the property and the property itself from the object. The delete operator only works on properties, not on variables or functions.
-
+```javascript
 const person = {
   firstName: "Matilda",
   age: 27,
@@ -102,10 +107,10 @@ console.log(person);
 }
 */
  
-
+```
 javascript passing objects as arguments
 When JavaScript objects are passed as arguments to functions or methods, they are passed by reference, not by value. This means that the object itself (not a copy) is accessible and mutable (can be changed) inside that function.
-
+```javascript
 const origNum = 8;
 const origObj = {color: 'blue'};
 
@@ -118,7 +123,6 @@ const changeItUp = (num, obj) => {
 
 changeItUp(origNum, origObj);
 
-
 // Will output 8 since integers are passed by value.
 console.log(origNum);
 
@@ -126,13 +130,14 @@ console.log(origNum);
 // Will output 'red' since objects are passed 
 // by reference and are therefore mutable.
 console.log(origObj.color);
+```
 JavaScript Object Methods
 JavaScript objects may have property values that are functions. These are referred to as object methods.
 
 Methods may be defined using anonymous arrow function expressions, or with shorthand method syntax.
 
 Object methods are invoked with the syntax: objectName.methodName(arguments).
-
+```javascript
 const engine = {
   // method shorthand, with one argument
   start(adverb) {
@@ -153,11 +158,12 @@ engine.sputter();
 The engine starts up noisily...
 The engine sputters...
 */
+```
 JavaScript destructuring assignment shorthand syntax
 The JavaScript destructuring assignment is a shorthand syntax that allows object properties to be extracted into specific variable values.
 
 It uses a pair of curly braces ({}) with property names on the left-hand side of an assignment to extract values from objects. The number of variables can be less than the total properties of an object.
-
+```javascript
 const rubiksCubeFacts = {
   possiblePermutations: '43,252,003,274,489,856,000',
   invented: '1974',
@@ -167,17 +173,19 @@ const {possiblePermutations, invented, largestCube} = rubiksCubeFacts;
 console.log(possiblePermutations); // '43,252,003,274,489,856,000'
 console.log(invented); // '1974'
 console.log(largestCube); // '17x17x17'
+```
 shorthand property name syntax for object creation
 The shorthand property name syntax in JavaScript allows creating objects without explicitly specifying the property names (ie. explicitly declaring the value after the key). In this process, an object is created where the property names of that object match variables which already exist in that context. Shorthand property names populate an object with a key matching the identifier and a value matching the identifier’s value.
-
+```javascript
 const activity = 'Surfing';
 const beach = { activity };
 console.log(beach); // { activity: 'Surfing' }
+```
 this Keyword
 The reserved keyword this refers to a method’s calling object, and it can be used to access properties belonging to that object.
 
 Here, using the this keyword inside the object function to refer to the cat object and access its name property.
-
+```javascript
 const cat = {
   name: 'Pipey',
   age: 8,
@@ -189,9 +197,10 @@ const cat = {
 
 console.log(cat.whatName()); 
 // Output: Pipey
+```
 javascript function this
 Every JavaScript function or method has a this context. For a function defined inside of an object, this will refer to that object itself. For a function defined outside of an object, this will refer to the global object (window in a browser, global in Node.js).
-
+```javascript
 const restaurant = {
   numCustomers: 45,
   seatCapacity: 100,
@@ -202,7 +211,7 @@ const restaurant = {
   }
 }
  
-
+```
  
 
 JavaScript Arrow Function this Scope
@@ -213,7 +222,7 @@ Consider the example code:
 loggerA is a property that uses arrow notation to define the function. Since data does not exist in the global context, accessing this.data returns undefined.
 
 loggerB uses method syntax. Since this refers to the enclosing object, the value of the data property is accessed as expected, returning "abc".
-
+```javascript
 const myObj = {
     data: 'abc',
     loggerA: () => { console.log(this.data); },
@@ -223,9 +232,10 @@ const myObj = {
 
 myObj.loggerA();    // undefined
 myObj.loggerB();    // 'abc'
+```
 getters and setters intercept property access
 JavaScript getter and setter methods are helpful in part because they offer a way to intercept property access and assignment, and allow for additional actions to be performed before these changes go into effect.
-
+```javascript
 const myCat = {
   _name: 'Snickers',
   get name(){
@@ -240,6 +250,7 @@ const myCat = {
     }
   }
 }
+```
 javascript factory functions
 A JavaScript function that returns an object is known as a factory function. Factory functions often accept parameters in order to customize the returned object.
 
