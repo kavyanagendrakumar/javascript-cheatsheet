@@ -382,7 +382,7 @@ Object.getOwnPropertyDescriptor(obj, 'a') // { value: 1, writable: true, enumera
 Object.getOwnPropertyDescriptor(obj, prop)
 ```
 **Object.getOwnPropertyDescriptors()**
-returns all own property descriptors
+returns all own property descriptors including symbolic and non-enumerable ones.
  
 ```javascript
 // example
