@@ -299,7 +299,7 @@ myCat.name = 'Yankee';
  ```
 
 **Object.assign()**
-shallow copies both string and Symbol properties from one or more source objects to target object
+shallow copies both string and Symbol properties from one or more source objects to target object. If target already has the key, then value gets overwritten.
  
 ```javascript
 // example
