@@ -474,7 +474,7 @@ Object.isSealed(obj) // true
 Object.isSealed(obj)
 ```
 **Object.keys()**
-returns array of object's enumerable property names
+returns array of object's enumerable property names. Object.keys/values/entries ignore symbolic properties
  
 ```javascript
 // example
