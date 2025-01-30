@@ -68,11 +68,6 @@ console.log(result); // Outputs: "Hello, World!"
 
 The recommended way to format strings in JavaScript is by using Template Literals (Template Strings) introduced in ECMAScript 6 (ES6). Template literals allow you to embed expressions, create multi-line strings, and use string interpolation features, making them a powerful tool for string formatting.
 
----
-title: Javascript String Manipulation - Javascript Cheatsheet
-description: String manipulation refers to the process of changing, parsing, slicing, or analyzing strings in various ways.
----
-
 <base-title :title="frontmatter.title" :description="frontmatter.description">
 Javascript String Manipulation
 </base-title>
@@ -234,3 +229,43 @@ console.log(trimmedRightStr); // Outputs: "   Hello, World!"
 
 In this example, `str` is a string with leading and trailing whitespace. The `trimLeft` method is called on `str`, resulting in a new string where the whitespace at the beginning is removed. Similarly, the `trimRight` method is called on `str`, resulting in a new string where the whitespace at the end is removed. The new strings are stored in the `trimmedLeftStr` and `trimmedRightStr` variables and then logged to the console.
 
+## toLocaleString()
+the toLocaleString() method is used to format dates, numbers, and other objects according to the user's locale settings.
+** Syntax
+```javascript
+toLocaleString()
+toLocaleString(locales)
+toLocaleString(locales, options)
+```
+** Number
+```javascript
+  const number = 123456.789;
+
+  // Default formatting (based on user's locale)
+  console.log(number.toLocaleString()); // "123,456.789" (in US English locale)
+
+  // Specific locale
+  console.log(number.toLocaleString('de-DE')); // "123.456,789" (in German locale)
+
+  // Customize formatting options
+  console.log(number.toLocaleString('en-US', { style: 'currency', currency: 'USD' })); // "$123,456.79"
+```
+** Date
+```javascript
+  const date = new Date();
+
+  // Default formatting (based on user's locale)
+  console.log(date.toLocaleString()); // "1/30/2025, 9:25:19 AM" (in US English locale)
+
+  // Specific locale
+  console.log(date.toLocaleString('fr-FR')); // "30/01/2025 09:25:19" (in French locale)
+
+  // Customize formatting options
+  console.log(date.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })); // "Thursday, January 30, 2025"
+```
+** Array
+```javascript
+  const array = [1, 2, 3];
+
+  console.log(array.toLocaleString()); // "1,2,3"
+```
