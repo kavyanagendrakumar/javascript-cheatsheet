@@ -299,7 +299,8 @@ myCat.name = 'Yankee';
  ```
 
 **Object.assign()**
-shallow copies both string and Symbol properties from one or more source objects to target object. If target already has the key, then value gets overwritten. Can't do deep copy.
+shallow copies both string and Symbol properties from one or more source objects to target object. If target already has the key, then value gets overwritten. nested objects are copied by
+reference. Can't do deep copy.
  
 ```javascript
 // example
