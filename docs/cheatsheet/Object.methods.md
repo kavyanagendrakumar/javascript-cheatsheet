@@ -299,13 +299,34 @@ myCat.name = 'Yankee';
  ```
 
 **Object.assign()**
-shallow copies both string and Symbol properties from one or more source objects to target object. If target already has the key, then value gets overwritten.
+shallow copies both string and Symbol properties from one or more source objects to target object. If target already has the key, then value gets overwritten. Can't do deep copy.
  
 ```javascript
 // example
 Object.assign({ a: 1, b: 2 }, { c: 3 }, { d: 4 }) // { a: 1, b: 2, c: 3, d: 4 }
 // syntax
 Object.assign(target, ...sources)
+```
+**structuredClone()**
+The call structuredClone(object) clones the object with all nested properties. The structuredClone method can clone most data types, such as objects, arrays, primitive values.
+It also supports circular references, when an object property references the object itself (directly or via a chain or references). Function properties aren’t supported.
+To handle such complex cases we may need to use a combination of cloning methods, write custom code or, to not reinvent
+the wheel, take an existing implementation, for instance _.cloneDeep(obj)  from the JavaScript library lodash .
+ 
+```javascript
+// example
+let user = {};
+// let's create a circular reference:
+// user.me references the user itself
+user.me = user;
+let clone = structuredClone(user);
+alert(clone.me === clone); // true
+
+// Functional property
+// error
+structuredClone({
+f: function() {}
+});
 ```
 
 **Object.create()**
