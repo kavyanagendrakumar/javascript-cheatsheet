@@ -3,7 +3,7 @@
 
 | **Symbol**                  | **What it Does**                                          | **Example** |
 |----------------------------|-----------------------------------------------------------|-------------|
-| `Symbol.iterator`          | Makes an object iterable (`for...of`)                     | ```js\nconst obj = {\n  *[Symbol.iterator]() {\n    yield 1;\n    yield 2;\n  }\n};\nfor (const val of obj) console.log(val); // 1, 2\n``` |
+| `Symbol.iterator`          | Makes an object iterable (`for...of`)                     | ```const obj = {  *[Symbol.iterator]() {    yield 1;    yield 2;  }};for (const val of obj) console.log(val); // 1, 2``` |
 | `Symbol.toPrimitive`       | Custom primitive conversion (`+obj`, `String(obj)`, etc.) | ```js\nconst obj = {\n  [Symbol.toPrimitive](hint) {\n    return hint === 'number' ? 42 : 'hello';\n  }\n};\nconsole.log(+obj);     // 42\nconsole.log(`${obj}`); // 'hello'\n``` |
 | `Symbol.toStringTag`       | Custom `[object XYZ]` output for debugging or logs        | ```js\nconst obj = {\n  [Symbol.toStringTag]: 'CustomObj'\n};\nconsole.log(Object.prototype.toString.call(obj)); // [object CustomObj]\n``` |
 | `Symbol.asyncIterator`     | Enables async iteration (`for await...of`)                | ```js\nconst obj = {\n  async *[Symbol.asyncIterator]() {\n    yield 'a';\n    yield 'b';\n  }\n};\n(async () => {\n  for await (const val of obj) console.log(val);\n})();\n``` |
