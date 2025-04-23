@@ -25,7 +25,7 @@ const obj = {
 console.log(Object.prototype.toString.call(obj)); // [object MyObject]
 ```
 
-## `Symbol.iterator` — Makes an object iterable (`for...of`)
+**`Symbol.iterator` — Makes an object iterable (`for...of`)
 ```javascript
 const obj = {
   *[Symbol.iterator]() {
@@ -37,7 +37,7 @@ const obj = {
 for (const val of obj) console.log(val); // 1, 2
 ```
 
-## Symbol.toPrimitive — Custom primitive conversion
+**Symbol.toPrimitive — Custom primitive conversion
 ```javascript
 const obj = {
   [Symbol.toPrimitive](hint) {
