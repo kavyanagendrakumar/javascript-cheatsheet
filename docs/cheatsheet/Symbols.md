@@ -1,12 +1,20 @@
 **JavaScript Symbol Cheatsheet: Everything You Need to Know**
-Symbol                        | What it Does
-Symbol.iterator               | Makes an object iterable (for...of)
-Symbol.toPrimitive            | Custom primitive conversion
-Symbol.toStringTag            | Custom [object XYZ] output
-Symbol.asyncIterator          | For async iteration (for await...of)
-Symbol.hasInstance            | Custom instanceof behavior
-Symbol.species                | Constructor override in subclassing
-Symbol.match, Symbol.replace  | Used by String.prototype.match, .replace, etc.
+# JavaScript System Symbols with Examples
+
+| **Symbol**                  | **What it Does**                                          | **Example** |
+|----------------------------|-----------------------------------------------------------|-------------|
+| `Symbol.iterator`          | Makes an object iterable (`for...of`)                     | ```js\nconst obj = {\n  *[Symbol.iterator]() {\n    yield 1;\n    yield 2;\n  }\n};\nfor (const val of obj) console.log(val); // 1, 2\n``` |
+| `Symbol.toPrimitive`       | Custom primitive conversion (`+obj`, `String(obj)`, etc.) | ```js\nconst obj = {\n  [Symbol.toPrimitive](hint) {\n    return hint === 'number' ? 42 : 'hello';\n  }\n};\nconsole.log(+obj);     // 42\nconsole.log(`${obj}`); // 'hello'\n``` |
+| `Symbol.toStringTag`       | Custom `[object XYZ]` output for debugging or logs        | ```js\nconst obj = {\n  [Symbol.toStringTag]: 'CustomObj'\n};\nconsole.log(Object.prototype.toString.call(obj)); // [object CustomObj]\n``` |
+| `Symbol.asyncIterator`     | Enables async iteration (`for await...of`)                | ```js\nconst obj = {\n  async *[Symbol.asyncIterator]() {\n    yield 'a';\n    yield 'b';\n  }\n};\n(async () => {\n  for await (const val of obj) console.log(val);\n})();\n``` |
+| `Symbol.hasInstance`       | Customize behavior of `instanceof`                        | ```js\nclass MyClass {\n  static [Symbol.hasInstance](instance) {\n    return typeof instance === 'string';\n  }\n}\nconsole.log('hello' instanceof MyClass); // true\n``` |
+| `Symbol.species`           | Control constructor returned in subclassed objects        | ```js\nclass MyArray extends Array {\n  static get [Symbol.species]() {\n    return Array;\n  }\n}\nconst a = new MyArray(1, 2, 3);\nconst b = a.map(x => x * 2);\nconsole.log(b instanceof MyArray); // false\nconsole.log(b instanceof Array);    // true\n``` |
+| `Symbol.match`             | Used by `String.prototype.match()`                        | ```js\nconst matcher = {\n  [Symbol.match](str) {\n    return str.includes('ok') ? ['ok'] : null;\n  }\n};\nconsole.log('are you ok?'.match(matcher)); // ['ok']\n``` |
+| `Symbol.replace`           | Used by `String.prototype.replace()`                      | ```js\nconst replacer = {\n  [Symbol.replace](str, replacement) {\n    return str.split(' ').join(replacement);\n  }\n};\nconsole.log('hello world'.replace(replacer, '-')); // 'hello-world'\n``` |
+| `Symbol.search`            | Used by `String.prototype.search()`                       | ```js\nconst searcher = {\n  [Symbol.search](str) {\n    return str.indexOf('yes');\n  }\n};\nconsole.log('say yes please'.search(searcher)); // 4\n``` |
+| `Symbol.split`             | Used by `String.prototype.split()`                        | ```js\nconst splitter = {\n  [Symbol.split](str) {\n    return str.split('').reverse();\n  }\n};\nconsole.log('abc'.split(splitter)); // ['c', 'b', 'a']\n``` |
+| `Symbol.isConcatSpreadable`| Controls behavior in `Array.prototype.concat()`           | ```js\nconst arr = [1, 2];\nconst obj = { 0: 'a', 1: 'b', length: 2, [Symbol.isConcatSpreadable]: true };\nconsole.log(arr.concat(obj)); // [1, 2, 'a', 'b']\n``` |
+| `Symbol.unscopables`       | Hides properties from `with` statements                   | ```js\nconst obj = {\n  a: 1,\n  b: 2,\n  [Symbol.unscopables]: { b: true }\n};\nwith (obj) {\n  console.log(a); // 1\n  console.log(typeof b); // 'undefined'\n}\n``` |
 
 ```javascipt
 const obj = {
