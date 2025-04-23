@@ -17,13 +17,13 @@
 | `Symbol.unscopables`       | Hides properties from `with` statements                   |
 
 ```javascipt
+// Example
 const obj = {
   [Symbol.toStringTag]: "MyObject"
 };
 
 console.log(Object.prototype.toString.call(obj)); // [object MyObject]
 ```
-# JavaScript System Symbols with Examples
 
 ## `Symbol.iterator` — Makes an object iterable (`for...of`)
 ```javascript
