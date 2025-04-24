@@ -26,6 +26,7 @@ console.log(Object.prototype.toString.call(obj)); // [object MyObject]
 ```
 
 ## `Symbol.iterator` — Makes an object iterable (`for...of`)
+Read Iterables (Important) - https://javascript.info/iterable 
 ```javascript
 const obj = {
   *[Symbol.iterator]() {
