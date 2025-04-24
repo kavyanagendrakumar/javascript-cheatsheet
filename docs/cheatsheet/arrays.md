@@ -20,7 +20,18 @@ An array in JavaScript is a high-level, list-like object that is used to store m
 
 ```javascript
 let fruits = ['apple', 'banana', 'cherry'];
+
+// The engine tries to store its elements in the contiguous
+memory area, one after another, just as depicted on the illustrations in this chapter, and there are other optimizations as well,
+to make arrays work really fast. But they all break if we quit working with an array as with an “ordered collection” and start working with it as if it were a
+regular object.  
+// For instance, technically we can do this: 
+let fruits = []; // make an array
+fruits[99999] = 5; // assign a property with the index far greater than its length. Here the length of array is 100,000
+fruits.age = 25; // create a property with an arbitrary name
+
 ```
+
 
 ## Array Declaration
 
