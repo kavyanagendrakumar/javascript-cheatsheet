@@ -131,7 +131,12 @@ console.log(fruit1); // logs 'apple'
 console.log(fruit3); // logs 'cherry'
 ```
 
-The second element of the array is skipped and not assigned to any variable.
+The second element of the array is skipped and not assigned to any variable. Actually, we can use it with any iterable, not only arrays. That works, because internally a destructuring assignment works by iterating over the right value. It’s a kind of syntax
+sugar for calling for..of over the value to the right of = and assigning the values.
+```javascript
+let [a, b, c] = "abc"; // ["a", "b", "c"]
+let [one, two, three] = new Set([1, 2, 3]);
+```
 
 ## The Spread Operator
 
