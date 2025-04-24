@@ -39,6 +39,7 @@ for (const val of obj) console.log(val); // 1, 2
 ```
 
 ## Symbol.toPrimitive — Custom primitive conversion
+Read Object to primitive conversion (Important) - https://javascript.info/object-toprimitive 
 ```javascript
 const obj = {
   [Symbol.toPrimitive](hint) {
