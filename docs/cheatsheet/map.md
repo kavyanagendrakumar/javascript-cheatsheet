@@ -121,6 +121,15 @@ for (const [key, value] of map) {
 // age: 20
 ```
 
+## Iterate Map using forEach
+The iteration goes in the same order as the values were inserted. Map preserves this order, unlike a regular Object . Map has a built-in forEach method, similar to Array :
+```javascript
+// runs the function for each (key, value) pair
+recipeMap.forEach( (value, key, map) => {
+alert(`${key}: ${value}`); // cucumber: 500 etc
+});
+```
+
 ## Iterate Map using keys()
 
 You can iterate over the map keys using `keys()` method as in the order it was inserted.
