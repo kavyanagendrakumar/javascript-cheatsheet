@@ -78,6 +78,9 @@ fruits.unshift('apple', 'pineapple'); // fruits is now ['apple', 'pineapple', 'b
 
 'apple' and 'pineapple' are added to the beginning of the `fruits` array.
 
+## Performance 
+Methods push/pop run fast, while shift/unshift are slow because shift and unshift has to move all elements to the beginning of the array after the operation. 
+
 ## Array Concat
 
 The `concat()` method is used to merge two or more arrays into one. This method does not change the existing arrays, but instead returns a new array that contains all the elements from the arrays you want to combine.
