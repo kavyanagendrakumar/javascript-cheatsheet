@@ -104,7 +104,7 @@ fruits.length = 2;
 console.log(fruits); // logs ['apple', 'banana']
 ```
 
-Setting `fruits.length = 2` removes the last element from the array, so the array now only contains 'apple' and 'banana'.
+Setting `fruits.length = 2` removes the last element from the array, so the array now only contains 'apple' and 'banana'. So, the simplest way to clear the array is: arr.length = 0; .
 
 ## Array destructuring
 
