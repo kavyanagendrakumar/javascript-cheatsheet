@@ -32,6 +32,35 @@ console.log(greeting); // Outputs: "Hello, my name is John and I am 30 years old
 
 Here, `name` and `age` are variables. The template literal is defined using backticks, and the variables are embedded in the string using `${}` syntax. The resulting string is stored in the `greeting` variable and then logged to the console.
 
+## Accessing characters
+Accessing characters
+To get a character at position pos , use square brackets [pos] or call the method str.at(pos)  . The first character starts
+from the zero position:
+```javascript
+let str = `Hello`;
+// the first character
+alert( str[0] ); // H
+alert( str.at(0) ); // H
+// the last character
+alert( str[str.length - 1] ); // o
+alert( str.at(-1) );
+```
+As you can see, the .at(pos) method has a benefit of allowing negative position. If pos is negative, then it’s counted from
+the end of the string.
+So .at(-1) means the last character, and .at(-2) is the one before it, etc.
+The square brackets always return undefined for negative indexes, for instance:
+```javascript
+let str = `Hello`;
+alert( str[-2] ); // undefined
+alert( str.at(-2) ); // l
+```
+We can also iterate over characters using for..of :
+```javascript
+for (let char of "Hello") {
+alert(char); // H,e,l,l,o (char becomes "H", then "e", then "l" etc)
+}
+```
+
 ## String Concatenation
 
 String concatenation is the operation of joining two or more strings together. This can be achieved using the `+` operator or the `concat` method.
