@@ -75,6 +75,14 @@ let str = 'Hi';
 str = 'h' + str[1]; // replace the string
 alert( str ); // hi
 ```
+We use the spread syntax to turn the string into array of characters:
+```javascript
+let str = "Hello";
+alert( [...str] ); // H,e,l,l,o
+```
+The spread syntax internally uses iterators to gather elements, the same way as for..of does.
+So, for a string, for..of returns characters and ...str becomes "H","e","l","l","o" . The list of characters is
+passed to array initializer [...str] .
 
 ## String Concatenation
 
