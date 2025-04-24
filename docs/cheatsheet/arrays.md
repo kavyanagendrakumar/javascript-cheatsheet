@@ -137,6 +137,17 @@ sugar for calling for..of over the value to the right of = and assigning the val
 let [a, b, c] = "abc"; // ["a", "b", "c"]
 let [one, two, three] = new Set([1, 2, 3]);
 ```
+### Swap variables trick
+There’s a well-known trick for swapping values of two variables using a destructuring assignment:
+```javascript
+let guest = "Jane";
+let admin = "Pete";
+// Let's swap the values: make guest=Pete, admin=Jane
+[guest, admin] = [admin, guest];
+alert(`${guest} ${admin}`); // Pete Jane (successfully swapped!)
+```
+Here we create a temporary array of two variables and immediately destructure it in swapped order.
+We can swap more than two variables this way.
 
 ## The Spread Operator
 
