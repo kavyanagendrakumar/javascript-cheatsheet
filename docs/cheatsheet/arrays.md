@@ -164,7 +164,9 @@ console.log(allFruits); // logs ['apple', 'banana', 'cherry', 'date']
 To loop over the elements of the array:
 
 ● for (let i=0; i<arr.length; i++) – works fastest, old-browser-compatible.
+
 ● for (let item of arr) – the modern syntax for items only,
+
 ● for (let i in arr) – never use.
 
 Technically, because arrays are objects, it is also possible to use for..in :
