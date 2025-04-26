@@ -114,7 +114,26 @@ function almostEqual(a, b) {
 
 ---
 
-# ⚡ Conclusion
-
-JavaScript is powerful but full of "freedom traps".  
-**Once you know them, you can write code that's *both* flexible and safe.**
+## Function bind
+this is set to the object when function is bound. Even if the object changes values later, the original value of object is bound to the function
+```javascript
+let user = {
+firstName: "John",
+sayHi() {
+console.log(`Hello, ${this.firstName}!`);
+}
+};
+let sayHi = user.sayHi.bind(user); // (*)
+// can run it without an object
+sayHi(); // Hello, John!
+setTimeout(() => {
+sayHi() // Hello, Joen!
+}, 1000); // Hello, John!
+// even if the value of user changes within 1 second
+// sayHi uses the pre-bound value which is reference to the old user object
+user = {
+sayHi() { alert("Another user in setTimeout!"); }
+};
+sayHi(); // Hello, John!
+console.log(user.firstName) // undefined
+```
