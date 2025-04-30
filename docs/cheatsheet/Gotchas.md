@@ -157,6 +157,13 @@ Prototype methods are designed for operations that need to interact with or modi
 
 The placement of a method (static vs. prototype) is determined by whether it needs access to the instance (this) or can function independently.
 
+Why Array.prototype.keys() can't be static - 
+.keys() returns an iterator of the indices of the array it’s called on.
+
+It must access the internal structure of the array — its length, indices, holes, etc.
+
+So it relies on this being the array — which is why it's an instance (prototype) method.
+
 If same method name exists in prototype chain and constructor chain - They don't conflict because 
 Animal.speak() calls the static method.
 
