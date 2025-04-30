@@ -137,3 +137,33 @@ sayHi() { alert("Another user in setTimeout!"); }
 sayHi(); // Hello, John!
 console.log(user.firstName) // undefined
 ```
+
+## Static methods
+Static properties/methods are used when we’d like to store class-level data, also not bound to an instance. 
+Static methods are inherited between classes.
+Subclasses can call or override them.
+They are not accessible on instances — only on constructors.
+
+Ex: why obj.toString() can't be static - 
+It’s designed to be overridden per object.
+
+It needs access to instance data via this.
+
+JS allows custom representations by modifying the prototype, not the constructor.
+
+Static methods are ideal for utility functions that don't require access to instance-specific data.
+
+Prototype methods are designed for operations that need to interact with or modify the instance's data.
+
+The placement of a method (static vs. prototype) is determined by whether it needs access to the instance (this) or can function independently.
+
+If same method name exists in prototype chain and constructor chain - They don't conflict because 
+Animal.speak() calls the static method.
+
+a.speak() (where a is an instance) calls the instance method on the prototype chain.
+
+They don’t conflict because:
+
+Static methods are on the constructor (Animal)
+
+Prototype methods are on Animal.prototype — used by instances
