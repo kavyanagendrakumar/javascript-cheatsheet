@@ -177,3 +177,6 @@ with (obj) {
 }
 
 ```
+Instance-level symbols customize how instances behave.
+
+Static-level symbols customize how classes (constructors) behave.
