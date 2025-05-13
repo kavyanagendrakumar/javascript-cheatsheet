@@ -1,407 +1,173 @@
-# Key Coding Interview Patterns
-
-After solving a lot of DSA problems, I’ve noticed some key patterns that are important for coding interviews.
-
-At the end of this article, I have also included links to some of the best LeetCode articles that I found helpful for better understanding.
+Certainly! Here's the article converted into Markdown format with hyperlinks to the mentioned LeetCode problems:
 
 ---
+
+# DSA Patterns You Need to Know
+
+After solving a lot of DSA problems, I’ve noticed some key patterns that are important for coding interviews. At the end of this article, I have also included links to some of the best LeetCode articles that I found helpful for better understanding.
 
 ## 1. Fast and Slow Pointer
 
 **Description:** This technique uses two pointers moving at different speeds to solve problems involving cycles, such as finding the middle of a list, detecting loops, or checking for palindromes.
 
-- Linked List Cycle II  
-- Remove nth Node from the End of List  
-- Find the Duplicate Number  
-- Palindrome Linked List
-
----
+* [Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/)
+* [Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
+* [Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/)
+* [Palindrome Linked List](https://leetcode.com/problems/palindrome-linked-list/)
 
 ## 2. Overlapping Intervals
 
 **Description:** Intervals are often manipulated through sorting and merging based on their start and end times.
 
-- Merge Intervals  
-- Insert Interval  
-- My Calendar II  
-- Minimum Number of Arrows to Burst Balloons  
-- Non-overlapping Intervals
-
----
+* [Merge Intervals](https://leetcode.com/problems/merge-intervals/)
+* [Insert Interval](https://leetcode.com/problems/insert-interval/)
+* [My Calendar II](https://leetcode.com/problems/my-calendar-ii/)
+* [Minimum Number of Arrows to Burst Balloons](https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/)
+* [Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)
 
 ## 3. Prefix Sum
 
-**Description:** Prefix Sums/Products store cumulative sums or products to allow quick subarray range queries.
+**Description:** Prefix Sums/Products are techniques that store cumulative sums or products up to each index, allowing for quick subarray range queries.
 
-- Find the Middle Index in Array  
-- Product of Array Except Self  
-- Maximum Product Subarray  
-- Number of Ways to Split Array  
-- Range Sum Query 2D
-
----
+* [Find the Middle Index in Array](https://leetcode.com/problems/find-the-middle-index-in-array/)
+* [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
+* [Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/)
+* [Number of Ways to Split Array](https://leetcode.com/problems/number-of-ways-to-split-array/)
+* [Range Sum Query 2D - Immutable](https://leetcode.com/problems/range-sum-query-2d-immutable/)
 
 ## 4. Sliding Window
 
-**Description:** A subarray/substring that "slides" over the input to solve problems in linear time.
+**Description:** A sliding window is a subarray or substring that moves over data to solve problems efficiently in linear time.
 
-### Fixed Size
-- Maximum Sum Subarray of Size K  
-- Number of Subarrays Having Average ≥ Threshold  
-- Repeated DNA Sequences  
-- Permutation in String  
-- Sliding Subarray Beauty  
-- Sliding Window Maximum
+**Fixed Size:**
 
-### Variable Size
-- Longest Substring Without Repeating Characters  
-- Minimum Size Subarray Sum  
-- Subarray Product Less Than K  
-- Max Consecutive Ones  
-- Fruits Into Baskets  
-- Count Number of Nice Subarrays  
-- Minimum Window Substring
+* [Maximum Sum Subarray of Size K](https://leetcode.com/problems/maximum-average-subarray-i/)
+* [Number of Subarrays Having Average Greater or Equal to Threshold](https://leetcode.com/problems/number-of-subarrays-of-size-k-and-average-greater-than-or-equal-to-threshold/)
+* [Repeated DNA Sequences](https://leetcode.com/problems/repeated-dna-sequences/)
+* [Permutation in String](https://leetcode.com/problems/permutation-in-string/)
+* [Sliding Subarray Beauty](https://leetcode.com/problems/sliding-subarray-beauty/)
+* [Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/)
 
----
+**Variable Size:**
+
+* [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
+* [Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/)
+* [Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/)
+* [Max Consecutive Ones](https://leetcode.com/problems/max-consecutive-ones/)
+* [Fruit Into Baskets](https://leetcode.com/problems/fruit-into-baskets/)
+* [Count Number of Nice Subarrays](https://leetcode.com/problems/count-number-of-nice-subarrays/)
+* [Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
 
 ## 5. Two Pointers
 
-**Description:** Two indices move at different speeds to solve array/linked list problems.
+**Description:** The two pointers technique involves having two different indices move through the input at different speeds to solve various array or linked list problems.
 
-- Two Sum II - Input Array is Sorted  
-- Sort Colors (Dutch National Flag)  
-- Next Permutation  
-- Bag of Tokens  
-- Container With Most Water  
-- Trapping Rain Water
-
----
+* [Two Sum II - Input Array Is Sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)
+* [Sort Colors](https://leetcode.com/problems/sort-colors/)
+* [Next Permutation](https://leetcode.com/problems/next-permutation/)
+* [Bag of Tokens](https://leetcode.com/problems/bag-of-tokens/)
+* [Container With Most Water](https://leetcode.com/problems/container-with-most-water/)
+* [Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/)
 
 ## 6. Cyclic Sort (Index-Based)
 
-**Description:** Efficient for placing consecutive numbers in correct positions.
+**Description:** Cyclic sort is an efficient approach to solve problems where numbers are consecutively ordered and must be placed in the correct index.
 
-- Missing Number  
-- Find Missing Numbers  
-- Set Mismatch  
-- First Missing Positive
-
----
+* [Missing Number](https://leetcode.com/problems/missing-number/)
+* [Find All Numbers Disappeared in an Array](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/)
+* [Set Mismatch](https://leetcode.com/problems/set-mismatch/)
+* [First Missing Positive](https://leetcode.com/problems/first-missing-positive/)
 
 ## 7. Reversal of Linked List (In-place)
 
-**Description:** Reverse a linked list without extra space.
+**Description:** Reversing a linked list in place without using extra space is key for problems that require in-place list manipulations.
 
-- Reverse Linked List  
-- Reverse Nodes in k-Group  
-- Swap Nodes in Pairs
-
----
+* [Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)
+* [Reverse Nodes in k-Group](https://leetcode.com/problems/reverse-nodes-in-k-group/)
+* [Swap Nodes in Pairs](https://leetcode.com/problems/swap-nodes-in-pairs/)
 
 ## 8. Matrix Manipulation
 
-**Description:** Use row-column traversal or matrix property-based logic.
+**Description:** Problems involving 2D arrays (matrices) are often solved using row-column traversal or manipulation based on matrix properties.
 
-- Rotate Image  
-- Spiral Matrix  
-- Set Matrix Zeroes  
-- Game of Life
-
----
+* [Rotate Image](https://leetcode.com/problems/rotate-image/)
+* [Spiral Matrix](https://leetcode.com/problems/spiral-matrix/)
+* [Set Matrix Zeroes](https://leetcode.com/problems/set-matrix-zeroes/)
+* [Game of Life](https://leetcode.com/problems/game-of-life/)
 
 ## 9. Breadth First Search (BFS)
 
-**Description:** Level-order exploration using a queue.
+**Description:** BFS explores nodes level by level using a queue. It is particularly useful for shortest path problems.
 
-- Shortest Path in Binary Matrix  
-- Rotten Oranges  
-- As Far From Land as Possible  
-- Word Ladder
-
----
+* [Shortest Path in Binary Matrix](https://leetcode.com/problems/shortest-path-in-binary-matrix/)
+* [Rotting Oranges](https://leetcode.com/problems/rotting-oranges/)
+* [As Far from Land as Possible](https://leetcode.com/problems/as-far-from-land-as-possible/)
+* [Word Ladder](https://leetcode.com/problems/word-ladder/)
 
 ## 10. Depth First Search (DFS)
 
-**Description:** Explore as far as possible before backtracking.
+**Description:** DFS explores as far as possible along a branch before backtracking. It's useful for graph traversal, pathfinding, and connected components.
 
-- Number of Closed Islands  
-- Coloring a Border  
-- Number of Enclaves  
-- Time Needed to Inform All Employees  
-- Find Eventual Safe States
-
----
+* [Number of Closed Islands](https://leetcode.com/problems/number-of-closed-islands/)
+* [Coloring a Border](https://leetcode.com/problems/coloring-a-border/)
+* [Number of Enclaves](https://leetcode.com/problems/number-of-enclaves/)
+* [Time Needed to Inform All Employees](https://leetcode.com/problems/time-needed-to-inform-all-employees/)
+* [Find Eventual Safe States](https://leetcode.com/problems/find-eventual-safe-states/)
 
 ## 11. Backtracking
 
-**Description:** Explore all potential solutions for puzzles and path-finding.
+**Description:** Backtracking helps in problems where you need to explore all potential solutions, such as solving puzzles, generating combinations, or finding paths.
 
-- Permutation II  
-- Combination Sum  
-- Generate Parenthesis  
-- N-Queens  
-- Sudoku Solver  
-- Palindrome Partitioning  
-- Word Search
-
----
+* [Permutations II](https://leetcode.com/problems/permutations-ii/)
+* [Combination Sum](https://leetcode.com/problems/combination-sum/)
+* [Generate Parentheses](https://leetcode.com/problems/generate-parentheses/)
+* [N-Queens](https://leetcode.com/problems/n-queens/)
+* [Sudoku Solver](https://leetcode.com/problems/sudoku-solver/)
+* [Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/)
+* [Word Search](https://leetcode.com/problems/word-search/)
 
 ## 12. Modified Binary Search
 
-**Description:** Apply binary search on rotated/special conditions.
+**Description:** A modified version of binary search that applies to rotated arrays, unsorted arrays, or specialized conditions.
 
-- Search in Rotated Sorted Array  
-- Find Minimum in Rotated Sorted Array  
-- Find Peak Element  
-- Single Element in a Sorted Array  
-- Minimum Time to Arrive on Time  
-- Capacity to Ship Packages Within 'D' Days  
-- Koko Eating Bananas  
-- Find in Mountain Array  
-- Median of Two Sorted Arrays
-
----
+* [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
+* [Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
+* [Find Peak Element](https://leetcode.com/problems/find-peak-element/)
+* [Single Element in a Sorted Array](https://leetcode.com/problems/single-element-in-a-sorted-array/)
+* [Minimum Time to Arrive on Time](https://leetcode.com/problems/minimum-time-to-arrive-on-time/)
+* [Capacity to Ship Packages Within D Days](https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/)
+* [Koko Eating Bananas](https://leetcode.com/problems/koko-eating-bananas/)
+* [Find in Mountain Array](https://leetcode.com/problems/find-in-mountain-array/)
+* [Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/)
 
 ## 13. Bitwise XOR
 
-**Description:** Solve problems like finding single elements and pairings.
+**Description:** XOR is a powerful bitwise operator that can solve problems like finding single numbers or efficiently pairing elements.
 
-- Missing Number  
-- Single Number II  
-- Single Number III  
-- Find the Original Array of Prefix XOR  
-- XOR Queries of a Subarray
-
----
+* [Missing Number](https://leetcode.com/problems/missing-number/)
+* [Single Number II](https://leetcode.com/problems/single-number-ii/)
+* [Single Number III](https://leetcode.com/problems/single-number-iii/)
+* [Find the Original Array of Prefix XOR](https://leetcode.com/problems/find-the-original-array-of-prefix-xor/)
+* [XOR Queries of a Subarray](https://leetcode.com/problems/xor-queries-of-a-subarray/)
 
 ## 14. Top 'K' Elements
 
-**Description:** Use heaps or quickselect.
+**Description:** This pattern uses heaps or quickselect to efficiently find the top 'K' largest/smallest elements from a dataset.
 
-- Top K Frequent Elements  
-- Kth Largest Element  
-- Ugly Number II  
-- K Closest Points to Origin
-
----
+* [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)
+* [Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/)
+* [Ugly Number II](https://leetcode.com/problems/ugly-number-ii/)
+* [K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/)
 
 ## 15. K-way Merge
 
-**Description:** Merge multiple sorted lists using a heap.
+**Description:** The K-way merge technique uses a heap to efficiently merge multiple sorted lists or arrays.
 
-- Find K Pairs with Smallest Sums  
-- Kth Smallest Element in a Sorted Matrix  
-- Merge K Sorted Lists  
-- Smallest Range Covering Elements from K Lists
-
----
+* [Find K Pairs with Smallest Sums](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/)
+* [Kth Smallest Element in a Sorted Matrix](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/)
+* [Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
+* [Smallest Range Covering Elements from K Lists](https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/)
 
 ## 16. Two Heaps
 
-**Description:** Use max heap + min heap for median/dynamic data tracking.
-
-- Find Median from Data Stream  
-- Sliding Window Median  
-- IPO
-
----
-
-## 17. Monotonic Stack
-
-**Description:** Solve range queries with increasing/decreasing stacks.
-
-- Next Greater Element II  
-- Next Greater Node in Linked List  
-- Daily Temperatures  
-- Online Stock Span  
-- Maximum Width Ramp  
-- Largest Rectangle in Histogram
-
----
-
-## 18. Trees
-
-### Level Order (BFS)
-- Level Order Traversal  
-- Zigzag Level Order Traversal  
-- Even Odd Tree  
-- Reverse Odd Levels  
-- Deepest Leaves Sum  
-- Add One Row to Tree  
-- Maximum Width of Binary Tree  
-- All Nodes Distance K in Binary Tree
-
-### Tree Construction
-- Construct BT from Preorder and Inorder  
-- Construct BT from Postorder and Inorder  
-- Maximum Binary Tree  
-- Construct BST from Preorder
-
-### Height-Related
-- Maximum Depth of BT  
-- Balanced Binary Tree  
-- Diameter of Binary Tree  
-- Minimum Depth of BT
-
-### Root to Leaf Paths
-- Binary Tree Paths  
-- Path Sum II  
-- Sum Root to Leaf Numbers  
-- Smallest String Starting from Leaf  
-- Insufficient Nodes in Root to Leaf  
-- Pseudo-Palindromic Paths in Binary Tree  
-- Binary Tree Maximum Path Sum
-
-### Ancestor Problems
-- LCA of Binary Tree  
-- Max Difference Between Node and Ancestor  
-- LCA of Deepest Leaves  
-- Kth Ancestor of a Tree Node
-
-### Binary Search Tree
-- Validate BST  
-- Range Sum of BST  
-- Minimum Absolute Difference in BST  
-- Insert into a BST  
-- LCA of BST
-
----
-
-## 19. Dynamic Programming (DP)
-
-### Take / Not Take (0/1 Knapsack)
-- House Robber II  
-- Target Sum  
-- Partition Equal Subset Sum  
-- Ones and Zeroes  
-- Last Stone Weight II
-
-### Infinite Supply
-- Coin Change  
-- Coin Change II  
-- Perfect Squares  
-- Minimum Cost For Tickets
-
-### Longest Increasing Subsequence
-- Longest Increasing Subsequence  
-- Largest Divisible Subset  
-- Maximum Length of Pair Chain  
-- Number of LIS  
-- Longest String Chain
-
-### DP on Grids
-- Unique Paths II  
-- Minimum Path Sum  
-- Triangle  
-- Minimum Falling Path Sum  
-- Maximal Square  
-- Cherry Pickup  
-- Dungeon Game
-
-### DP on Strings
-- Longest Common Subsequence  
-- Longest Palindromic Subsequence  
-- Palindromic Substrings  
-- Longest Palindromic Substring  
-- Edit Distance  
-- Minimum ASCII Delete Sum for Two Strings  
-- Distinct Subsequences  
-- Shortest Common Supersequence  
-- Wildcard Matching
-
-### DP on Stocks
-- Buy and Sell Stocks II  
-- Buy and Sell Stocks III  
-- Buy and Sell Stocks IV  
-- Buy and Sell with Cooldown  
-- Buy and Sell with Transaction Fee
-
-### Partition DP (MCM)
-- Partition Array for Maximum Sum  
-- Burst Balloons  
-- Minimum Cost to Cut a Stick  
-- Palindrome Partitioning II
-
----
-
-## 20. Graphs
-
-### Topological Sort (DAG)
-- Course Schedule  
-- Course Schedule II  
-- Strange Printer II  
-- Sequence Reconstruction  
-- Alien Dictionary
-
-### Union Find (Disjoint Set)
-- Number of Operations to Make Network Connected  
-- Redundant Connection  
-- Accounts Merge  
-- Satisfiability of Equality Equations
-
-### Graph Algorithms
-- Kruskal's: Minimum Cost to Connect All Points  
-- Dijkstra's: Cheapest Flights Within K Stops  
-- Floyd-Warshall: City with Smallest #Neighbors at Threshold  
-- Bellman-Ford: Network Delay Time
-
----
-
-## 21. Greedy
-
-**Description:** Make the best choice at every step.
-
-- Jump Game II  
-- Gas Station  
-- Bag of Tokens  
-- Boats to Save People  
-- Wiggle Subsequence  
-- Car Pooling  
-- Candy
-
----
-
-## 22. Design Data Structures
-
-**Description:** Build optimized data structures for custom operations.
-
-- Design Twitter  
-- Design Browser History  
-- Design Circular Deque  
-- Snapshot Array  
-- LRU Cache  
-- LFU Cache
-
----
-
-## Useful LeetCode Articles
-
-- **Two Pointers**  
-  - Solved all Two Pointers problems in 100 days  
-- **Sliding Window**  
-  - Sliding Window Technique and Question Bank  
-  - C++ Maximum Sliding Window Cheatsheet Template!  
-- **Greedy**  
-  - Greedy for Beginners: Problems & Sample Solutions  
-  - Top Greedy Questions  
-- **Linked List**  
-  - Become Master in Linked List  
-  - Must-Do LinkedList Problems on LeetCode  
-- **Trees**  
-  - Tree Question Pattern | 2021 Placement  
-  - Master Tree Patterns  
-- **Binary Search**  
-  - 5 Variations of Binary Search  
-  - Binary Search for Beginners: Problems & Patterns  
-- **Dynamic Programming (DP)**  
-  - Dynamic Programming Patterns  
-  - DP for Beginners: Problems & Patterns  
-- **Graphs**  
-  - Graph for Beginners  
-  - Become Master in Graph  
-  - Graph algorithms + problems to practice  
-- **Bit Manipulation**  
-  - Bit Manipulation Problem Solving  
-  - All Types of Bit Manipulation Patterns and How to Use
-
----
+**Description:** This pattern uses two heaps (max heap and
