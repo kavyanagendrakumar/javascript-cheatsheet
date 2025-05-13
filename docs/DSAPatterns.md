@@ -1,173 +1,302 @@
-Certainly! Here's the article converted into Markdown format with hyperlinks to the mentioned LeetCode problems:
+# DSA Patterns You Need To Know by Anubhav (x7og)
+
+Hey LeetCoders,
+
+I'm Anubhav, and I'm thrilled to share a comprehensive guide to DSA patterns that are crucial for acing coding interviews. Understanding these patterns can transform your problem-solving approach, making complex problems feel more manageable. Let's dive in!
 
 ---
 
-# DSA Patterns You Need to Know
+## 1. Sliding Window
 
-After solving a lot of DSA problems, I’ve noticed some key patterns that are important for coding interviews. At the end of this article, I have also included links to some of the best LeetCode articles that I found helpful for better understanding.
+**Description:**
+The Sliding Window pattern is used to perform a required operation on a specific window size of a given array or linked list. It involves creating a window that can either be of a fixed or variable size, and this window "slides" over the data.
 
-## 1. Fast and Slow Pointer
+**When to use:**
+*   When the problem involves a contiguous subarray or substring.
+*   When you need to find the min/max/average or some other property of a subarray/substring of a fixed or variable size.
+*   Problems asking for the longest/shortest subarray/substring satisfying certain conditions.
 
-**Description:** This technique uses two pointers moving at different speeds to solve problems involving cycles, such as finding the middle of a list, detecting loops, or checking for palindromes.
+**Common Problems:**
+*   [Maximum Sum Subarray of Size K](https://leetcode.com/problems/maximum-subarray/) (Note: Original problem is general, size K is a variant)
+*   [Smallest Subarray with a Greater Sum](https://leetcode.com/problems/minimum-size-subarray-sum/)
+*   [Longest Substring with K Distinct Characters](https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/)
+*   [Fruit Into Baskets](https://leetcode.com/problems/fruit-into-baskets/)
+*   [No-repeat Substring](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
+*   [Longest Substring with Same Letters after Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/)
+*   [Longest Subarray with Ones after Replacement](https://leetcode.com/problems/max-consecutive-ones-iii/)
 
-* [Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/)
-* [Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
-* [Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/)
-* [Palindrome Linked List](https://leetcode.com/problems/palindrome-linked-list/)
+---
 
-## 2. Overlapping Intervals
+## 2. Two Pointers
 
-**Description:** Intervals are often manipulated through sorting and merging based on their start and end times.
+**Description:**
+The Two Pointers pattern uses two pointers to iterate through an array or list until the pointers meet or satisfy a certain condition. These pointers can move towards each other, away from each other, or in the same direction.
 
-* [Merge Intervals](https://leetcode.com/problems/merge-intervals/)
-* [Insert Interval](https://leetcode.com/problems/insert-interval/)
-* [My Calendar II](https://leetcode.com/problems/my-calendar-ii/)
-* [Minimum Number of Arrows to Burst Balloons](https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/)
-* [Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)
+**When to use:**
+*   Problems involving sorted arrays or linked lists where you need to find a pair, triplet, or subsegment.
+*   When you need to compare elements from both ends of an array or from different positions simultaneously.
+*   Problems that can be solved by processing the array from two different directions.
 
-## 3. Prefix Sum
+**Common Problems:**
+*   [Pair with Target Sum](https://leetcode.com/problems/two-sum/) (Sorted array variant)
+*   [Remove Duplicates](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
+*   [Squaring a Sorted Array](https://leetcode.com/problems/squares-of-a-sorted-array/)
+*   [Triplet Sum to Zero](https://leetcode.com/problems/3sum/)
+*   [Triplet Sum Close to Target](https://leetcode.com/problems/3sum-closest/)
+*   [Subarrays with Product Less than a Target](https://leetcode.com/problems/subarray-product-less-than-k/)
+*   [Dutch National Flag Problem](https://leetcode.com/problems/sort-colors/)
 
-**Description:** Prefix Sums/Products are techniques that store cumulative sums or products up to each index, allowing for quick subarray range queries.
+---
 
-* [Find the Middle Index in Array](https://leetcode.com/problems/find-the-middle-index-in-array/)
-* [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
-* [Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/)
-* [Number of Ways to Split Array](https://leetcode.com/problems/number-of-ways-to-split-array/)
-* [Range Sum Query 2D - Immutable](https://leetcode.com/problems/range-sum-query-2d-immutable/)
+## 3. Fast & Slow Pointers (Hare & Tortoise)
 
-## 4. Sliding Window
+**Description:**
+This pattern uses two pointers that move through a sequence (like a linked list or array) at different speeds. The fast pointer moves more steps per iteration than the slow pointer.
 
-**Description:** A sliding window is a subarray or substring that moves over data to solve problems efficiently in linear time.
+**When to use:**
+*   Detecting cycles in a linked list or array.
+*   Finding the middle element of a linked list.
+*   Problems where you need to determine a position relative to the end of a list without knowing its length.
 
-**Fixed Size:**
+**Common Problems:**
+*   [LinkedList Cycle](https://leetcode.com/problems/linked-list-cycle/)
+*   [Start of LinkedList Cycle](https://leetcode.com/problems/linked-list-cycle-ii/)
+*   [Happy Number](https://leetcode.com/problems/happy-number/)
+*   [Middle of the LinkedList](https://leetcode.com/problems/middle-of-the-linked-list/)
 
-* [Maximum Sum Subarray of Size K](https://leetcode.com/problems/maximum-average-subarray-i/)
-* [Number of Subarrays Having Average Greater or Equal to Threshold](https://leetcode.com/problems/number-of-subarrays-of-size-k-and-average-greater-than-or-equal-to-threshold/)
-* [Repeated DNA Sequences](https://leetcode.com/problems/repeated-dna-sequences/)
-* [Permutation in String](https://leetcode.com/problems/permutation-in-string/)
-* [Sliding Subarray Beauty](https://leetcode.com/problems/sliding-subarray-beauty/)
-* [Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/)
+---
 
-**Variable Size:**
+## 4. Merge Intervals
 
-* [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
-* [Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/)
-* [Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/)
-* [Max Consecutive Ones](https://leetcode.com/problems/max-consecutive-ones/)
-* [Fruit Into Baskets](https://leetcode.com/problems/fruit-into-baskets/)
-* [Count Number of Nice Subarrays](https://leetcode.com/problems/count-number-of-nice-subarrays/)
-* [Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
+**Description:**
+The Merge Intervals pattern is used to deal with overlapping intervals. Given two intervals (‘a’ and ‘b’), there will be six different ways the two intervals can relate to each other.
 
-## 5. Two Pointers
+**When to use:**
+*   Problems involving merging, inserting, or finding intersections of intervals.
+*   When you need to consolidate a list of time periods or ranges.
 
-**Description:** The two pointers technique involves having two different indices move through the input at different speeds to solve various array or linked list problems.
+**Common Problems:**
+*   [Merge Intervals](https://leetcode.com/problems/merge-intervals/)
+*   [Insert Interval](https://leetcode.com/problems/insert-interval/)
+*   [Intervals Intersection](https://leetcode.com/problems/interval-list-intersections/)
+*   [Conflicting Appointments](https://leetcode.com/problems/meeting-rooms-ii/) (Checking if any appointments conflict is Meeting Rooms I, finding min rooms is Meeting Rooms II)
 
-* [Two Sum II - Input Array Is Sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)
-* [Sort Colors](https://leetcode.com/problems/sort-colors/)
-* [Next Permutation](https://leetcode.com/problems/next-permutation/)
-* [Bag of Tokens](https://leetcode.com/problems/bag-of-tokens/)
-* [Container With Most Water](https://leetcode.com/problems/container-with-most-water/)
-* [Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/)
+---
 
-## 6. Cyclic Sort (Index-Based)
+## 5. Cyclic Sort
 
-**Description:** Cyclic sort is an efficient approach to solve problems where numbers are consecutively ordered and must be placed in the correct index.
+**Description:**
+This pattern is used to deal with problems involving arrays containing numbers in a given range (e.g., 1 to N). The idea is to iterate through the array and if the current number is not at its correct index, swap it with the number at its correct index.
 
-* [Missing Number](https://leetcode.com/problems/missing-number/)
-* [Find All Numbers Disappeared in an Array](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/)
-* [Set Mismatch](https://leetcode.com/problems/set-mismatch/)
-* [First Missing Positive](https://leetcode.com/problems/first-missing-positive/)
+**When to use:**
+*   Problems involving a sorted array with numbers in a definite range (e.g., 1 to n).
+*   Finding missing numbers, duplicate numbers, or the smallest missing positive number in an unsorted array.
 
-## 7. Reversal of Linked List (In-place)
+**Common Problems:**
+*   [Cyclic Sort](https://leetcode.com/problems/missing-number/) (Conceptual problem, Missing Number is an application)
+*   [Find the Missing Number](https://leetcode.com/problems/missing-number/)
+*   [Find all Missing Numbers](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/)
+*   [Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/)
+*   [Find all Duplicate Numbers](https://leetcode.com/problems/find-all-duplicates-in-an-array/)
 
-**Description:** Reversing a linked list in place without using extra space is key for problems that require in-place list manipulations.
+---
 
-* [Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)
-* [Reverse Nodes in k-Group](https://leetcode.com/problems/reverse-nodes-in-k-group/)
-* [Swap Nodes in Pairs](https://leetcode.com/problems/swap-nodes-in-pairs/)
+## 6. In-place Reversal of a LinkedList
 
-## 8. Matrix Manipulation
+**Description:**
+This pattern is used to reverse the links between nodes of a linked list in-place, i.e., without using extra space. Often, three pointers are used: `previous`, `current`, and `next`.
 
-**Description:** Problems involving 2D arrays (matrices) are often solved using row-column traversal or manipulation based on matrix properties.
+**When to use:**
+*   When you need to reverse a linked list or parts of it.
+*   Problems that require processing a linked list in reverse order.
 
-* [Rotate Image](https://leetcode.com/problems/rotate-image/)
-* [Spiral Matrix](https://leetcode.com/problems/spiral-matrix/)
-* [Set Matrix Zeroes](https://leetcode.com/problems/set-matrix-zeroes/)
-* [Game of Life](https://leetcode.com/problems/game-of-life/)
+**Common Problems:**
+*   [Reverse a LinkedList](https://leetcode.com/problems/reverse-linked-list/)
+*   [Reverse a Sub-list](https://leetcode.com/problems/reverse-linked-list-ii/)
+*   [Reverse every K-element Sub-list](https://leetcode.com/problems/reverse-nodes-in-k-group/)
 
-## 9. Breadth First Search (BFS)
+---
 
-**Description:** BFS explores nodes level by level using a queue. It is particularly useful for shortest path problems.
+## 7. Tree Breadth-First Search (Tree BFS)
 
-* [Shortest Path in Binary Matrix](https://leetcode.com/problems/shortest-path-in-binary-matrix/)
-* [Rotting Oranges](https://leetcode.com/problems/rotting-oranges/)
-* [As Far from Land as Possible](https://leetcode.com/problems/as-far-from-land-as-possible/)
-* [Word Ladder](https://leetcode.com/problems/word-ladder/)
+**Description:**
+Tree BFS involves traversing a tree level by level. It uses a queue to keep track of nodes at the current level before moving to the next level.
 
-## 10. Depth First Search (DFS)
+**When to use:**
+*   Finding the shortest path between two nodes in a tree.
+*   Level order traversal of a tree.
+*   Problems where you need to process nodes based on their depth or level.
 
-**Description:** DFS explores as far as possible along a branch before backtracking. It's useful for graph traversal, pathfinding, and connected components.
+**Common Problems:**
+*   [Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)
+*   [Reverse Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/)
+*   [Zigzag Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/)
+*   [Level Averages in a Binary Tree](https://leetcode.com/problems/average-of-levels-in-binary-tree/)
+*   [Connect Level Order Siblings](https://leetcode.com/problems/populating-next-right-pointers-in-each-node/)
 
-* [Number of Closed Islands](https://leetcode.com/problems/number-of-closed-islands/)
-* [Coloring a Border](https://leetcode.com/problems/coloring-a-border/)
-* [Number of Enclaves](https://leetcode.com/problems/number-of-enclaves/)
-* [Time Needed to Inform All Employees](https://leetcode.com/problems/time-needed-to-inform-all-employees/)
-* [Find Eventual Safe States](https://leetcode.com/problems/find-eventual-safe-states/)
+---
 
-## 11. Backtracking
+## 8. Tree Depth-First Search (Tree DFS)
 
-**Description:** Backtracking helps in problems where you need to explore all potential solutions, such as solving puzzles, generating combinations, or finding paths.
+**Description:**
+Tree DFS involves traversing a tree by going as deep as possible along each branch before backtracking. It can be implemented using recursion or an explicit stack.
 
-* [Permutations II](https://leetcode.com/problems/permutations-ii/)
-* [Combination Sum](https://leetcode.com/problems/combination-sum/)
-* [Generate Parentheses](https://leetcode.com/problems/generate-parentheses/)
-* [N-Queens](https://leetcode.com/problems/n-queens/)
-* [Sudoku Solver](https://leetcode.com/problems/sudoku-solver/)
-* [Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/)
-* [Word Search](https://leetcode.com/problems/word-search/)
+**When to use:**
+*   Pathfinding in a tree (e.g., finding a path from root to a specific node).
+*   Problems involving tree traversal where order (pre-order, in-order, post-order) is important.
+*   Checking structural properties of a tree (e.g., if it's a valid BST).
 
-## 12. Modified Binary Search
+**Common Problems:**
+*   [Binary Tree Path Sum](https://leetcode.com/problems/path-sum/)
+*   [All Paths for a Sum](https://leetcode.com/problems/path-sum-ii/)
+*   [Sum of Path Numbers](https://leetcode.com/problems/sum-root-to-leaf-numbers/)
+*   [Path With Given Sequence](https://leetcode.com/problems/check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree/)
+*   [Count Paths for a Sum](https://leetcode.com/problems/path-sum-iii/)
 
-**Description:** A modified version of binary search that applies to rotated arrays, unsorted arrays, or specialized conditions.
+---
 
-* [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
-* [Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
-* [Find Peak Element](https://leetcode.com/problems/find-peak-element/)
-* [Single Element in a Sorted Array](https://leetcode.com/problems/single-element-in-a-sorted-array/)
-* [Minimum Time to Arrive on Time](https://leetcode.com/problems/minimum-time-to-arrive-on-time/)
-* [Capacity to Ship Packages Within D Days](https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/)
-* [Koko Eating Bananas](https://leetcode.com/problems/koko-eating-bananas/)
-* [Find in Mountain Array](https://leetcode.com/problems/find-in-mountain-array/)
-* [Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/)
+## 9. Two Heaps
 
-## 13. Bitwise XOR
+**Description:**
+In many problems where we need to find something among a collection of elements, like the smallest, largest, or median, heaps (or priority queues) can be very useful. If we need to find both, or maintain elements in two sets, the Two Heaps pattern can be applied.
 
-**Description:** XOR is a powerful bitwise operator that can solve problems like finding single numbers or efficiently pairing elements.
+**When to use:**
+*   Finding the median of a stream of numbers.
+*   Problems where you need to maintain elements in two sets, typically one for smaller halves and one for larger halves.
+*   Scheduling problems.
 
-* [Missing Number](https://leetcode.com/problems/missing-number/)
-* [Single Number II](https://leetcode.com/problems/single-number-ii/)
-* [Single Number III](https://leetcode.com/problems/single-number-iii/)
-* [Find the Original Array of Prefix XOR](https://leetcode.com/problems/find-the-original-array-of-prefix-xor/)
-* [XOR Queries of a Subarray](https://leetcode.com/problems/xor-queries-of-a-subarray/)
+**Common Problems:**
+*   [Find the Median of a Number Stream](https://leetcode.com/problems/find-median-from-data-stream/)
+*   [Sliding Window Median](https://leetcode.com/problems/sliding-window-median/)
+*   [Maximize Capital](https://leetcode.com/problems/ipo/)
 
-## 14. Top 'K' Elements
+---
 
-**Description:** This pattern uses heaps or quickselect to efficiently find the top 'K' largest/smallest elements from a dataset.
+## 10. Subsets
 
-* [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)
-* [Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/)
-* [Ugly Number II](https://leetcode.com/problems/ugly-number-ii/)
-* [K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/)
+**Description:**
+This pattern deals with generating all possible subsets (or permutations, combinations) of a given set of elements. It often involves backtracking or iterative approaches.
 
-## 15. K-way Merge
+**When to use:**
+*   Generating permutations or combinations.
+*   Problems that require exploring all possible configurations or groupings of elements.
 
-**Description:** The K-way merge technique uses a heap to efficiently merge multiple sorted lists or arrays.
+**Common Problems:**
+*   [Subsets](https://leetcode.com/problems/subsets/)
+*   [Subsets With Duplicates](https://leetcode.com/problems/subsets-ii/)
+*   [Permutations](https://leetcode.com/problems/permutations/)
+*   [String Permutations by changing case](https://leetcode.com/problems/letter-case-permutation/)
+*   [Balanced Parentheses](https://leetcode.com/problems/generate-parentheses/)
+*   [Unique Generalized Abbreviations](https://leetcode.com/problems/generalized-abbreviation/)
 
-* [Find K Pairs with Smallest Sums](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/)
-* [Kth Smallest Element in a Sorted Matrix](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/)
-* [Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
-* [Smallest Range Covering Elements from K Lists](https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/)
+---
 
-## 16. Two Heaps
+## 11. Modified Binary Search
 
-**Description:** This pattern uses two heaps (max heap and
+**Description:**
+This pattern is an extension of the standard Binary Search. It's used when the target element or condition is not straightforward, or the array has some specific properties (e.g., bitonic, rotated).
+
+**When to use:**
+*   Searching in sorted arrays where the condition for finding the element is complex.
+*   Finding an element in a bitonic array or a rotated sorted array.
+*   Problems where the search space can be divided in half based on some property.
+
+**Common Problems:**
+*   [Order-agnostic Binary Search](https://leetcode.com/problems/binary-search/) (Standard, but basis for modifications)
+*   [Ceiling of a Number](https://leetcode.com/problems/find-smallest-letter-greater-than-target/) (Variant, find number >= target)
+*   [Next Letter](https://leetcode.com/problems/find-smallest-letter-greater-than-target/)
+*   [Number Range](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
+*   [Search in a Sorted Infinite Array](https://leetcode.com/problems/search-in-a-sorted-array-of-unknown-size/)
+*   [Search in Rotated Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
+
+---
+
+## 12. Top 'K' Elements
+
+**Description:**
+This pattern is used to find the top 'K' (or smallest 'K') elements from a given set. A min-heap or max-heap is often used to efficiently keep track of the 'K' elements.
+
+**When to use:**
+*   Finding the K largest/smallest numbers, most frequent numbers, etc.
+*   Problems where you need to select a small number of items from a large dataset based on some criteria.
+
+**Common Problems:**
+*   [Top 'K' Numbers](https://leetcode.com/problems/kth-largest-element-in-an-array/)
+*   [Kth Smallest Number](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/) (or in an unsorted array)
+*   ['K' Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/)
+*   [Connect Ropes (Minimum Cost to Connect Ropes)](https://leetcode.com/problems/minimum-cost-to-connect-sticks/)
+*   [Top 'K' Frequent Numbers](https://leetcode.com/problems/top-k-frequent-elements/)
+*   [Frequency Sort](https://leetcode.com/problems/sort-characters-by-frequency/)
+*   [Kth Largest Element in a Stream](https://leetcode.com/problems/kth-largest-element-in-a-stream/)
+
+---
+
+## 13. K-way Merge
+
+**Description:**
+This pattern is used to merge 'K' sorted lists or arrays into a single sorted list. A min-heap is often used to efficiently get the smallest element among the heads of all 'K' lists.
+
+**When to use:**
+*   Merging multiple sorted inputs.
+*   Problems involving finding the smallest/largest elements from a combination of sorted lists.
+
+**Common Problems:**
+*   [Merge K Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
+*   [Kth Smallest Number in M Sorted Lists](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/) (Can be seen as K-way merge idea)
+*   [Kth Smallest Number in a Sorted Matrix](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/)
+*   [Smallest Number Range (covering elements from K lists)](https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/)
+
+---
+
+## 14. 0/1 Knapsack (Dynamic Programming)
+
+**Description:**
+The 0/1 Knapsack pattern is used to solve problems where you need to select items with given weights and values to maximize total value without exceeding a weight capacity. Each item can either be taken or not (0/1). This is a classic DP pattern.
+
+**When to use:**
+*   Optimization problems where you have to choose items to maximize/minimize some value under certain constraints.
+*   Problems that can be broken down into subproblems of whether to include an item or not.
+
+**Common Problems:**
+*   [0/1 Knapsack](https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/) (Classic problem, often a basis for LeetCode variants)
+*   [Equal Subset Sum Partition](https://leetcode.com/problems/partition-equal-subset-sum/)
+*   [Subset Sum](https://leetcode.com/problems/target-sum/) (Can be framed as this)
+*   [Minimum Subset Sum Difference](https://leetcode.com/problems/partition-array-into-two-arrays-to-minimize-sum-difference/) (Harder variant)
+*   [Count of Subset Sum](https://leetcode.com/problems/target-sum/)
+*   [Target Sum](https://leetcode.com/problems/target-sum/)
+
+---
+
+## 15. Topological Sort (Graph)
+
+**Description:**
+Topological Sort is used to find a linear ordering of elements that have dependencies on each other. For example, if task A must be completed before task B, then A comes before B in the ordering. It's typically used with Directed Acyclic Graphs (DAGs).
+
+**When to use:**
+*   Scheduling tasks with dependencies.
+*   Determining the order of compilation of source files.
+*   Finding if a graph has a cycle (if topological sort is not possible for all nodes).
+
+**Common Problems:**
+*   [Task Scheduling](https://leetcode.com/problems/course-schedule/) (Is it possible to finish all tasks?)
+*   [Task Scheduling Order](https://leetcode.com/problems/course-schedule-ii/)
+*   [Alien Dictionary](https://leetcode.com/problems/alien-dictionary/)
+*   [Reconstructing a Sequence](https://leetcode.com/problems/sequence-reconstruction/)
+
+---
+
+**Conclusion:**
+
+Mastering these DSA patterns will significantly boost your problem-solving skills for coding interviews. Practice problems related to each pattern to solidify your understanding. Remember, pattern recognition is key!
+
+Happy Coding!
+
+**Anubhav (x7og)**
+
+---
+
+**Connect with me:**
+*   **LeetCode:** [x7og](https://leetcode.com/u/x7og/)
+*   **LinkedIn:** [Anubhav Singh](https://www.linkedin.com/in/anubhavsinghx7og/)
+*   **GitHub:** [anubhavsinghx7og](https://github.com/anubhavsinghx7og)
+*   **Topmate:** [Anubhav Singh](https://topmate.io/anubhavsingh)
