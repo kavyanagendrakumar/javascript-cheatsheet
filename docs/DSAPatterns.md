@@ -1,3 +1,6 @@
+https://leetcode.com/discuss/post/5886397/dsa-patterns-you-need-to-know-by-anubhav-x7og/ 
+https://www.designgurus.io/course/grokking-the-coding-interview
+
 ## Additional patterns 
 
 ### Heap
