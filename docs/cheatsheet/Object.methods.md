@@ -299,12 +299,12 @@ myCat.name = 'Yankee';
  ```
 
 **Object.assign()**
-shallow copies both string and Symbol properties from one or more source objects to target object. If target already has the key, then value gets overwritten. nested objects are copied by
-reference. Can't do deep copy.
+shallow copies both string and Symbol properties from one or more source objects to target object. If target already has the key, then value gets overwritten. nested objects are copied by reference. Can't do deep copy. Another way to copy objects is by iterating through all properties using for in and copying to destination object. If a property value is an object, then reference is copied
  
 ```javascript
 // example
 Object.assign({ a: 1, b: 2 }, { c: 3 }, { d: 4 }) // { a: 1, b: 2, c: 3, d: 4 }
+let clone = Object.assign({}, user); // Copy user to empty object
 // syntax
 Object.assign(target, ...sources)
 ```
@@ -321,7 +321,7 @@ let user = {};
 // user.me references the user itself
 user.me = user;
 let clone = structuredClone(user);
-alert(clone.me === clone); // true
+alert(clone.me === clone); // true.As you can see clone.me references the clone, not the user! So the circular reference was cloned correctly as well.
 
 // Functional property
 // error
