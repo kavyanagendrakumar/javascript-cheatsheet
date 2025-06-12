@@ -31,7 +31,7 @@ let car = {
 };
 ```
 
-`maker`, `model`, and `year` are properties of the `car` object, and `startEngine` is a method. You can access the properties using dot notation (e.g., `car.maker`) or bracket notation (e.g., `car["maker"]`), and you can call the method like this: `car.startEngine()`.
+`maker`, `model`, and `year` are properties of the `car` object, and `startEngine` is a method. You can access the properties using dot notation (e.g., `car.maker`) or bracket notation (e.g., `car["maker"]`), and you can call the method like this: `car.startEngine()`. Object properties can be any strings or symbols except reserve keywords. Other types are automatically converted to strings. Special property __proto__ can't be set to non-object value. 
 
 ## Object Declaration
 
@@ -221,7 +221,9 @@ console.log(obj.key3 !== undefined); // Outputs: false
 
 ## Iterating Over Object Properties
 
-Iterate over an object's properties using a `for...in` loop.
+Iterate over an object's properties using a `for...in` loop. Are objects ordered? In other words, if we loop over an object, do we get all properties in the same order they were added?
+Can we rely on this?
+The short answer is: “ordered in a special fashion”: integer properties are sorted, others appear in creation order. The “integer property” term here means a string that can be converted to-and-from an integer without a change. "49" is integer property but "+49" and "1.2" are not.
 
 ```javascript
 let obj = {
@@ -280,3 +282,8 @@ obj.myMethod(); // Outputs: 'Property1 is value1'
 ```
 
 `this.property1` within the method refers to the `property1` of the object `obj`.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Const objects can be modified
+An important side effect of storing objects as references is that an object declared as const can be modified. Because the constant stores the pointer to object. We are modifying the object not the pointer. 
