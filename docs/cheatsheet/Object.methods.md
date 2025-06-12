@@ -229,7 +229,7 @@ const restaurant = {
  
 
 **JavaScript Arrow Function this Scope**
-Arrow functions are special: they don’t have their “own” this. If we reference this from such a function, it’s taken from the outer “normal” function. it’s useful when we actually do not want to have a separate this, but rather to take it from the outer context like for object methods 
+Arrow functions are special: they don’t have their “own” this. If we reference this from such a function, it’s taken from the outer “normal” function. it’s useful when we actually do not want to have a separate this, but rather to take it from the outer context.
 ```javascript
   let user = {
   firstName: "Ilya",
