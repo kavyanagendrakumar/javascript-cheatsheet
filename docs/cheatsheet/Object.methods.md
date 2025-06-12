@@ -185,7 +185,7 @@ const beach = { activity };
 console.log(beach); // { activity: 'Surfing' }
 ```
 **this Keyword**
-The reserved keyword this refers to a method’s calling object, and it can be used to access properties belonging to that object.
+In objects - The value of this is the object “before dot”, the one used to call the method., and it can be used to access properties belonging to that object. The value of this is evaluated during the run-time, depending on the context. 
 
 Here, using the this keyword inside the object function to refer to the cat object and access its name property.
 ```javascript
@@ -200,9 +200,20 @@ const cat = {
 
 console.log(cat.whatName()); 
 // Output: Pipey
+
+// Technically, it’s also possible to access the object without this, by referencing it via the outer variable. But such code is unreliable. If we decide to copy user to another variable, e.g. admin = user and overwrite user with something else, then it will access the wrong object.
+let user = {
+name: "John",
+age: 30,
+sayHi() {
+alert( user.name ); // leads to an error
+}
+};
+let admin = user;
+user = null; // overwrite to make things obvious
 ```
 javascript function this
-Every JavaScript function or method has a this context. For a function defined inside of an object, this will refer to that object itself. For a function defined outside of an object, this will refer to the global object (window in a browser, global in Node.js).
+Every JavaScript function or method has a this context. For a function defined inside of an object, this will refer to that object itself. For a function defined outside of an object, this will refer to the global object (window in a browser, global in Node.js) in non strict mode and undefined in strict mode.
 ```javascript
 const restaurant = {
   numCustomers: 45,
@@ -218,7 +229,19 @@ const restaurant = {
  
 
 **JavaScript Arrow Function this Scope**
-JavaScript arrow functions do not have their own this context, but use the this of the surrounding lexical context. Thus, they are generally a poor choice for writing object methods.
+Arrow functions are special: they don’t have their “own” this. If we reference this from such a function, it’s taken from the outer “normal” function. it’s useful when we actually do not want to have a separate this, but rather to take it from the outer context like for object methods 
+```javascript
+  let user = {
+  firstName: "Ilya",
+  sayHi() {
+    let arrow = () => alert(this.firstName);
+    arrow();
+  }
+};
+user.sayHi(); // Ilya
+```
+
+Verify whether this statement is true - Thus, they are generally a poor choice for writing object methods.
 
 Consider the example code:
 
