@@ -38,6 +38,14 @@ const obj = {
 console.log(Object.prototype.toString.call(obj)); // [object MyObject]
 ```
 
+## Use cases of symbols 
+Refer https://javascript.info/symbol 
+
+1. to create hidden properties that no other part of code can accidentally access or overwrite. For instance, if we’re working with user objects, that belong to a third-party code. We’d like to add identifiers to them. What’s the benefit of using Symbol("id") over a string "id"? As user objects belong to another codebase, it’s unsafe to add fields to them, since we might affect pre-defined behavior in that other codebase. However, symbols cannot be accessed accidentally. The third-party code won’t be aware of newly defined symbols, so it’s safe to add symbols to the user objects.
+2. Symbols are skipped by for…in. If another script or a library loops over our object, it won’t unexpectedly access a symbolic property.
+3. Global symbols
+4. There are many system symbols used by JavaScript which are accessible as Symbol.*. We can use them to alter some built-in behaviors.
+
 ## `Symbol.iterator` — Makes an object iterable (`for...of`)
 Read Iterables (Important) - https://javascript.info/iterable
 
