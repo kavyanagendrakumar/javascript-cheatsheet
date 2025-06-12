@@ -16,7 +16,8 @@ Javascript Functions
   </base-disclaimer-content>
 </base-disclaimer>
 
-A function is a block of organized, reusable code that is used to perform a single, related action. Functions provide better modularity for your application and a high degree of code reusing.
+A function is a block of organized, reusable code that is used to perform a single, related action. Functions provide better modularity for your application and a high degree of code reusing. In JS, function is a value.
+
 
 ## Function Declaration
 
