@@ -23,7 +23,7 @@ Symbols don’t auto-convert to a string.
 let id = Symbol("id");
 alert(id); // TypeError: Cannot convert a Symbol value to a string
 
-If we really want to show a symbol, we need to explicitly call .toString() on it, like here:
+//If we really want to show a symbol, we need to explicitly call .toString() on it, like here:
 
 let id = Symbol("id");
 alert(id.toString()); // Symbol(id), now it works
