@@ -277,22 +277,56 @@ const myCat = {
   }
 }
 ```
-**javascript factory functions**
-A JavaScript function that returns an object is known as a factory function. Factory functions often accept parameters in order to customize the returned object.
+**javascript factory functions** Refer Constructor, operator "new" for more info. There is more info you need to now than these notes- https://javascript.info/constructor-new 
+A JavaScript function that returns an object is known as a factory function/constructor function. Factory functions often accept parameters in order to customize the returned object. That’s the main purpose of constructors – to implement reusable object creation code. Technically, any function (except arrow functions, as they don’t have this) can be used as a constructor. It can be run with new, and it will execute the algorithm below. The “capital letter first” is a common agreement, to make it clear that a function is to be run with new.
+
+Constructor functions technically are regular functions. There are two conventions though:
+1. They are named with capital letter first.
+2. They should be executed only with "new" operator.
+
+When a function is executed with new, it does the following steps:
+1. A new empty object is created and assigned to this.
+2. The function body executes. Usually it modifies this, adds new properties to it.
+3. The value of this is returned.
+   
 ```javascript
-// A factory function that accepts 'name', 
-// 'age', and 'breed' parameters to return 
-// a customized dog object. 
-const dogFactory = (name, age, breed) => {
-  return {
-    name: name,
-    age: age,
-    breed: breed,
-    bark() {
-      console.log('Woof!');  
-    }
-  };
+function User(name) {
+// this = {}; (implicitly)
+// add properties to this
+this.name = name;
+this.isAdmin = false;
+// return this; (implicitly)
+}
+//So let user = new User("Jack") gives the same result as:
+let user = {
+name: "Jack",
+isAdmin: false
 };
+
+
+// create a function and immediately call it with new
+let user = new function() {
+this.name = "John";
+this.isAdmin = false;
+// ...other code for user creation
+// maybe complex logic and statements
+// local variables etc
+};
+This constructor can’t be called again, because it is not saved anywhere, just created and called. So this trick aims to
+encapsulate the code that constructs the single object, without future reuse.
+
+ Advanced stuff
+The syntax from this section is rarely used, skip it unless you want to know everything.
+Inside a function, we can check whether it was called with new or without it, using a special new.target property.
+It is undefined for regular calls and equals the function if called with new:
+That can be used inside the function to know whether it was called with new, “in constructor mode”, or without it, “in regular
+mode”.
+We can also make both new and regular calls to do the same, like this:
+Constructor mode test: new.target
+this.name = name;
+this.isAdmin = false;
+// return this; (implicitly)
+}
  
 ```
 **javascript getters and setters restricted**
