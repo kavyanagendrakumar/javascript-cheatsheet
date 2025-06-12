@@ -16,6 +16,19 @@
 | `Symbol.isConcatSpreadable`| Controls behavior in `Array.prototype.concat()`           |
 | `Symbol.unscopables`       | Hides properties from `with` statements                   |
 
+Symbols are guaranteed to be unique. Even if we create many symbols with exactly the same description, they are different values. The description is just a label that doesn’t affect anything.
+
+Symbols don’t auto-convert to a string.  
+```javascript
+let id = Symbol("id");
+alert(id); // TypeError: Cannot convert a Symbol value to a string
+
+If we really want to show a symbol, we need to explicitly call .toString() on it, like here:
+
+let id = Symbol("id");
+alert(id.toString()); // Symbol(id), now it works
+```
+
 ```javascipt
 // Example
 const obj = {
