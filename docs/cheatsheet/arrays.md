@@ -88,7 +88,7 @@ In this case, `fruits[1] = 'blueberry'` changes the second element of the array 
 
 ## Array Length
 
-The `length` property of an array in JavaScript returns the number of elements in the array. It's not a method, so you don't call it with parentheses.
+The length property automatically updates when we modify the array. To be precise, it is actually not the count of values in the array, but the greatest numeric index plus one.
 
 ```javascript
 let fruits = ['apple', 'banana', 'cherry'];
@@ -98,8 +98,12 @@ console.log(fruits.length); // logs 3
 `fruits.length` is 3 because there are three elements in the `fruits` array.
 
 You can also use the `length` property to change the number of elements in an array:
-
 ```javascript
+let fruits = [];
+fruits[123] = "Apple";
+alert( fruits.length ); // 124
+
+
 fruits.length = 2;
 console.log(fruits); // logs ['apple', 'banana']
 ```
