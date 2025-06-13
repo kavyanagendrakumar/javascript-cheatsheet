@@ -451,4 +451,6 @@ const stringObj = new String('grace');
 | match()       | str.match(/[A-Z]/g)         | ["H", "L"]                | array       |
 | split()       | str.split()                 | ["HeLlo"]                 | array       |
 | split()       | str.split('')               | ["H", "e", "L", "l", "o"] | array       |
+| codePointAt() | str.codePointAt(pos)            | ( "Z".codePointAt(0) ); // 90           | number       | //Returns a decimal number representing the code for the character at position pos:
+| fromCodePoint()| String.fromCodePoint(90)          | String.fromCodePoint(90) ); // Z | string       | //Creates a character by its numeric code
 
