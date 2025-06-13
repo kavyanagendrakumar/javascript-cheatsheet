@@ -625,16 +625,15 @@ items is an array, then its elements are taken.
 
 ### To search among elements:
 
-● indexOf/lastIndexOf(item, pos) – look for item starting from position pos , and return the index or -1 if not
-found.
+● indexOf/lastIndexOf(item, pos) – look for item starting from position pos , and return the index or -1 if not found. 
 
 ● includes(value) – returns true if the array has value , otherwise false .
 
 ● find/filter(func) – filter elements through the function, return first/all values that make it return true .
 
-● findIndex is like find , but returns the index instead of a value.
+● findIndex/findLastIndex is like find , but returns the index instead of a value.
 
-● To iterate over elements:
+### To iterate over elements:
 
 ● forEach(func) – calls func for every element, does not return anything.
 
@@ -642,7 +641,7 @@ found.
 
 ● map(func) – creates a new array from results of calling func for every element.
 
-● sort(func) – sorts the array in-place, then returns it.
+● sort(func) – sorts the array in-place, then returns it. The items are sorted as strings by default. Literally, all elements are converted to strings for comparisons. For strings, lexicographic ordering is applied and indeed "2" > "15".
 
 ● reverse() – reverses the array in-place, then returns it.
 
