@@ -37,3 +37,10 @@ Why? Let’s replay what’s happening at line (*):
 2. In strict mode, writing into it is an error.
 3. Otherwise, the operation with the property is carried on, the object gets the test property, but after that the “wrapper object” disappears, so in the last line str has no trace of the property.
 This example clearly shows that primitives are not objects. They can’t store additional data.
+
+Don't create primitives using Object wrappers
+```javascript
+   alert( typeof 0 ); // "number"
+   alert( typeof new Number(0) ); // "object"!
+   let num = Number("123"); // convert a string to number. without new is totally fine
+```
