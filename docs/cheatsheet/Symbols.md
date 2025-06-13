@@ -63,6 +63,8 @@ for (const val of obj) console.log(val); // 1, 2
 
 ## Symbol.toPrimitive — Custom primitive conversion
 Read Object to primitive conversion (Important) - https://javascript.info/object-toprimitive 
+Arrays do not have Symbol.toPrimitive, neither a viable valueOf, they implement only toString conversion, so [] becomes an empty string, [1] becomes "1" and [1,2] becomes "1,2"
+
 ```javascript
 const obj = {
   [Symbol.toPrimitive](hint) {
