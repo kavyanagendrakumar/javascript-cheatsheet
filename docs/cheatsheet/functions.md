@@ -219,7 +219,7 @@ Arrow functions and regular functions in JavaScript are similar in many ways, bu
     obj2.createArrowFunction()(); // 'a'
     ```
 
-3. **Arguments object**: Regular functions have an "arguments" object which contains all the arguments passed to the function. Arrow functions do not have an "arguments" object. If you need to access arguments with an arrow function, you can use rest parameters instead.
+3. **Arguments object**: Regular functions have an "arguments" object which contains all the arguments passed to the function. It is an array-like iterable object not arrays. Arrow functions do not have an "arguments" object. If you need to access arguments with an arrow function, you can use rest parameters instead.
 
 4. **Constructors and prototypes**: Regular functions, when used with the `new` keyword, can act as constructors. Arrow functions, however, do not have a `prototype` property and cannot act as constructors, so they can't be used with `new`.
 
