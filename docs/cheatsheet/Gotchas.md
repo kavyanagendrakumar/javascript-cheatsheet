@@ -193,3 +193,13 @@ alert ( Rabbit.getOwnPropertyNames({a: 1, b: 2})); // a,b
 // for the built-in Object constructor, 
 Object.__proto__ === Function.prototype .
    ```
+
+## Error scenarios
+```javascript
+// show message
+let message = "Hello";
+alert(message);
+// show another message
+let message = "Goodbye"; // Error: variable already declared
+alert(message);
+```
