@@ -195,6 +195,7 @@ As we know, the “extends” syntax sets up two prototypes:
    ```
 
 ## Error scenarios
+1.
 ```javascript
 // show message
 let message = "Hello";
@@ -203,3 +204,4 @@ alert(message);
 let message = "Goodbye"; // Error: variable already declared
 alert(message);
 ```
+2. If a variable you are trying to access is not found anywhere, that’s an error in strict mode (without use strict, an assignment to a non-existing variable creates a new global variable, for compatibility with old code)
