@@ -157,6 +157,14 @@ Why do we use func? Maybe just use sayHi for the nested call? - The problem with
   func(); // Error, func is not defined (not visible outside of the function)
 ```
 
+## new Function 
+new Function allows to turn any string into a function. For example, we can receive a new function from a server and then execute it. It is used in very specific cases, like when we receive code from a server, or to dynamically compile a function from a template, in complex web-applications. Functions created with new Function, have [[Environment]] referencing the global Lexical Environment, not the outer one. So, such function doesn’t have access to outer variables, only to the global ones. If new Function had access to outer variables, it would have problems with minifiers because minifiers change names to shorter alphabets for optimization. 
+```javascript
+  let func = new Function ([arg1, arg2, ...argN], functionBody);
+
+  new Function('a', 'b', 'return a + b'); // basic syntax
+```
+
 ## Anonymous Functions
 
 An anonymous function in JavaScript is a function that is not given a name. Instead, it is usually used where a function is expected as an argument, such as in a callback function or an event handler.
