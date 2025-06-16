@@ -302,7 +302,8 @@ Transparent caching - If the function is called often, we may want to cache (rem
 ```
 
 ## Using “func.call/apply” for the context - Call forwarding 
-The caching decorator mentioned above is not suited to work with object methods. Passing all arguments along with the context to another function is called call forwarding.
+The caching decorator mentioned above is not suited to work with object methods. Once a method is passed somewhere separately from the object – this is lost.
+Passing all arguments along with the context to another function is called call forwarding.
 ```javascript
   // we'll make worker.slow caching
   let worker = {
@@ -402,3 +403,5 @@ Some decorators may provide their own properties. E.g. a decorator may count how
 
 Decorator is a wrapper around a function that alters its behavior. The main job is still carried out by the function. Decorators can be seen as “features” or “aspects” that can be added to a function. We can add one or add many. And all this without changing its code!
 We also saw an example of method borrowing when we take a method from an object and call it in the context of another object. It is quite common to take array methods and apply them to arguments. The alternative is to use rest parameters object that is a real array.
+
+The method setTimeout in-browser is a little special: it sets this=window for the function call
