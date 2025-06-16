@@ -299,3 +299,81 @@ Transparent caching - If the function is called often, we may want to cache (rem
   alert( slow(1) ); // slow(1) is cached and the result returned
   alert( "Again: " + slow(1) ); // slow(1) result returned from cache
 ```
+
+## Using “func.call” for the context
+The caching decorator mentioned above is not suited to work with object methods. 
+```javascript
+  // we'll make worker.slow caching
+  let worker = {
+    someMethod() {
+      return 1;
+  },
+  slow(x) {
+    // scary CPU-heavy task here
+    alert("Called with " + x);
+    return x * this.someMethod(); // (*)
+  }
+  };
+  // same code as before
+  function cachingDecorator(func) {
+    let cache = new Map();
+    return function(x) {
+      if (cache.has(x)) {
+        return cache.get(x);
+      }
+      let result = func(x); // (**)
+      cache.set(x, result);
+      return result;
+      };
+    }
+    alert( worker.slow(1) ); // the original method works
+    worker.slow = cachingDecorator(worker.slow); // now make it caching
+    alert( worker.slow(2) ); // Whoops! Error: Cannot read property 'someMethod' of undefined
+```
+The reason is that the wrapper calls the original function as func(x) in the line (**). And, when called like that, the function gets this = undefined. We would observe a similar symptom if we tried to run:
+```javascript
+  let func = worker.slow;
+    func(2);
+```
+So, the wrapper passes the call to the original method, but without the context this. Hence the error.
+To fix this, There’s a special built-in function method func.call(context, …args) that allows to call a function explicitly setting this.
+As an example, in the code below we call sayHi in the context of different objects: sayHi.call(user) runs sayHi providing this=user, and the next line sets this=admin:
+```javascript
+  func.call(context, arg1, arg2, ...) // It runs func providing the first argument as this, and the next as the arguments.
+  function sayHi() {
+    alert(this.name);
+  }
+  let user = { name: "John" };
+  let admin = { name: "Admin" };
+  // use call to pass different objects as "this"
+  sayHi.call( user ); // John
+  sayHi.call( admin ); // Admin
+```
+In our case, we can use call in the wrapper to pass the context to the original function:
+```javascript
+  let worker = {
+  someMethod() {
+    return 1;
+  },
+  slow(x) {
+    alert("Called with " + x);
+    return x * this.someMethod(); // (*)
+  }
+  };
+  function cachingDecorator(func) {
+    let cache = new Map();
+    return function(x) {
+      if (cache.has(x)) {
+        return cache.get(x);
+      }
+      let result = func.call(this, x); // "this" is passed correctly now
+      cache.set(x, result);
+      return result;
+    };
+  }
+  worker.slow = cachingDecorator(worker.slow); // now make it caching
+  alert( worker.slow(2) ); // works
+  alert( worker.slow(2) ); // works, doesn't call the original (cached)
+```
+
+## func.apply
