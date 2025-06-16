@@ -405,3 +405,66 @@ Decorator is a wrapper around a function that alters its behavior. The main job 
 We also saw an example of method borrowing when we take a method from an object and call it in the context of another object. It is quite common to take array methods and apply them to arguments. The alternative is to use rest parameters object that is a real array.
 
 The method setTimeout in-browser is a little special: it sets this=window for the function call
+
+## Bind
+Functions provide a built-in method bind that allows to fix this when functions and methods are forwarded. The result of func.bind(context) is a special function-like “exotic object”, that is callable as function and transparently passes the call to func setting this=context. In other words, calling boundFunc is like func with fixed this. All arguments are passed to the original func “as is”, for instance:
+```javascript
+  let user = {
+    firstName: "John"
+  };
+  function func(phrase) {
+    alert(phrase + ', ' + this.firstName);
+  }
+  // bind this to user
+  let funcUser = func.bind(user);
+  funcUser("Hello"); // Hello, John (argument "Hello" is passed, and this=user)
+
+  //Now let’s try with an object method:
+  let user = {
+  firstName: "John",
+  sayHi() {
+    alert(`Hello, ${this.firstName}!`);
+  }
+  };
+  let sayHi = user.sayHi.bind(user); // (*)
+  // can run it without an object
+  sayHi(); // Hello, John!
+  setTimeout(sayHi, 1000); // Hello, John!
+  // even if the value of user changes within 1 second
+  // sayHi uses the pre-bound value which is reference to the old user object
+  user = {
+    sayHi() { alert("Another user in setTimeout!"); }
+  };
+
+  //bindAll methods of user   
+  for (let key in user) {
+    if (typeof user[key] == 'function') {
+      user[key] = user[key].bind(user);
+    }
+  }
+```
+
+**Partial functions**
+We can bind not only this, but also arguments. That’s rarely done, but sometimes can be handy. For instance, we have a function send(from, to, text). Then, inside a user object we may want to use a partial variant of it: sendTo(to, text) that sends from the current user.
+
+Going partial without context - What if we’d like to fix some arguments, but not the context this? For example, for an object method. The native bind does not allow that. We can’t just omit the context and jump to arguments.
+Fortunately, a function partial for binding only arguments can be easily implemented.
+```javascript
+  function partial(func, ...argsBound) {
+    return function(...args) { // (*)
+      return func.call(this, ...argsBound, ...args);
+    }
+  }
+  // Usage:
+  let user = {
+    firstName: "John",
+    say(time, phrase) {
+      alert(`[${time}] ${this.firstName}: ${phrase}!`);
+    }
+  };
+  // add a partial method with fixed time
+  user.sayNow = partial(user.say, new Date().getHours() + ':' + new Date().getMinutes());
+  user.sayNow("Hello");
+  // Something like:
+  // [10:00] John: Hello!
+```
