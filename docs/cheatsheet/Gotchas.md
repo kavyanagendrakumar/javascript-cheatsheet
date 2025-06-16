@@ -185,13 +185,13 @@ As we know, the “extends” syntax sets up two prototypes:
     alert( Rabbit.__proto__ === Object ); // (2) true
 
    // So Rabbit now provides access to the static methods of Object via Rabbit , like this:
-class Rabbit extends Object {}
-// normally we call Object.getOwnPropertyNames
-alert ( Rabbit.getOwnPropertyNames({a: 1, b: 2})); // a,b
-
-// But if we don’t have extends Object , then Rabbit.__proto__ is not set to Object .
-// for the built-in Object constructor, 
-Object.__proto__ === Function.prototype .
+    class Rabbit extends Object {}
+    // normally we call Object.getOwnPropertyNames
+    alert ( Rabbit.getOwnPropertyNames({a: 1, b: 2})); // a,b
+    
+    // But if we don’t have extends Object , then Rabbit.__proto__ is not set to Object .
+    // for the built-in Object constructor, 
+    Object.__proto__ === Function.prototype .
    ```
 
 ## Error scenarios
