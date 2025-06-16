@@ -2,7 +2,10 @@ In JavaScript, functions are objects. A good way to imagine functions is as call
 
 1. The “name” property - a function’s name is accessible as the “name” property. Object methods have names too:
 2. The “length” property - There is another built-in property “length” that returns the number of function parameters
-3. Custom properties - We can also add properties of our own. A property is not a variable and vice versa. A property assigned to a function like sayHi.counter = 0 does not define a local variable counter inside it. Variables are not function properties and vice versa. The count is now stored in the function directly, not in its outer Lexical Environment. Is it better or worse than using a closure? The main difference is that if the value of count lives in an outer variable, then external code is unable to access it. Only nested functions may modify it. And if it’s bound to a function, then such a thing is possible:
+3. Custom properties - We can also add properties of our own. A property is not a variable and vice versa. A property assigned to a function like sayHi.counter = 0 does not define a local variable counter inside it. Variables are not function properties and vice versa. The count is now stored in the function directly, not in its outer Lexical Environment. Is it better or worse than using a closure? The main difference is that if the value of count lives in an outer variable, then external code is unable to access it. Only nested functions may modify it. And if it’s bound to a function, then such a thing is possible.
+
+Many well-known JavaScript libraries make great use of this feature. They create a “main” function and attach many other “helper” functions to it. For instance, the jQuery library creates a function named $. The lodash library creates a function _ , and then adds _.clone, _.keyBy and other properties to it. They do it to lessen their pollution of the global space, so that a single library gives only one global variable. That reduces the possibility of naming conflicts. So, a function can do a useful job by itself and also carry a bunch of other functionality in properties.
+
 ```javascript
 //Name
   let sayHi = function() {
@@ -133,6 +136,26 @@ let greet = function() {
 ```
 
 In this case, calling `greet` before it's defined results in an error, because function expressions are not hoisted to the top of their containing scope.
+
+## Named Function Expression 
+Named Function Expression, or NFE, is a term for Function Expressions that have a name. For instance, let’s take an ordinary Function Expression: And add a name to it. Adding the name "func" after function did not make it a
+Function Declaration, because it is still created as a part of an assignment expression. What’s the purpose of that additional "func" name? - There are two special things about the name func, that are the reasons for it:
+1. It allows the function to reference itself internally.
+2. It is not visible outside of the function.
+
+Why do we use func? Maybe just use sayHi for the nested call? - The problem with that code is that sayHi may change in the outer code. If the function gets assigned to another variable instead, the code will start to give errors:
+```javascript
+  let sayHi = function func(who) {
+  if (who) {
+    alert(`Hello, ${who}`);
+    } else {
+    sayHi("Guest"); // Error: sayHi is not a function. So use func to re-call itself
+    }
+  };
+  sayHi(); // Hello, Guest
+  // But this won't work:
+  func(); // Error, func is not defined (not visible outside of the function)
+```
 
 ## Anonymous Functions
 
