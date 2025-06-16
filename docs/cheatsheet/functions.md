@@ -1,22 +1,40 @@
----
-title: Javascript Functions - Javascript Cheatsheet
-description: A function is a block of organized code that is used to perform a single task.
----
+In JavaScript, functions are objects. A good way to imagine functions is as callable “action objects”. We can not only call them, but also treat them as objects: add/remove properties, pass by reference etc.
 
-<base-title :title="frontmatter.title" :description="frontmatter.description">
-Javascript Functions
-</base-title>
+1. The “name” property - a function’s name is accessible as the “name” property. Object methods have names too:
+2. The “length” property - There is another built-in property “length” that returns the number of function parameters
+3. Custom properties - We can also add properties of our own. A property is not a variable and vice versa. A property assigned to a function like sayHi.counter = 0 does not define a local variable counter inside it. Variables are not function properties and vice versa. The count is now stored in the function directly, not in its outer Lexical Environment. Is it better or worse than using a closure? The main difference is that if the value of count lives in an outer variable, then external code is unable to access it. Only nested functions may modify it. And if it’s bound to a function, then such a thing is possible:
+```javascript
+//Name
+  let sayHi = function() {
+    alert("Hi");
+  };
+  alert(sayHi.name); // sayHi (there's a name!)
 
-<base-disclaimer>
-  <base-disclaimer-title>
-    <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions">Programming Functions</a>
-  </base-disclaimer-title>
-  <base-disclaimer-content>
-    A function in JavaScript is a ... of statements that performs a task or calculates a value ...To use a function, you must define it somewhere in the scope from which you wish to call it.
-  </base-disclaimer-content>
-</base-disclaimer>
+let user = {
+  sayHi() {
+  // ...
+  }
+}
+alert(user.sayHi.name); // sayHi
 
-A function is a block of organized, reusable code that is used to perform a single, related action. Functions provide better modularity for your application and a high degree of code reusing. In JS, function is a value.
+//Length
+function many(a, b, ...more) {}
+alert(many.length); // 2. Here we can see that rest parameters are not counted
+
+//Property
+function makeCounter() {
+  // instead of:
+  // let count = 0
+  function counter() {
+    return counter.count++;
+  };
+  counter.count = 0;
+  return counter;
+}
+let counter = makeCounter();
+alert( counter() ); // 0
+alert( counter() ); // 1
+```
 
 
 ## Function Declaration
