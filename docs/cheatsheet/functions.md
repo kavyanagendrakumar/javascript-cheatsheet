@@ -386,7 +386,7 @@ There’s only a subtle difference regarding args:
 ## Method Borrowing
 ```javascript
   function hash() {
-    alert( arguments.join() ); // Error: arguments.join is not a function
+    alert( arguments.join() ); // Error: arguments.join is not a function because arguments is array-like not array
   }
   hash(1, 2);
 
