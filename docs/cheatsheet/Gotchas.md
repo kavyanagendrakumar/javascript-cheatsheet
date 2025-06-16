@@ -193,6 +193,27 @@ As we know, the “extends” syntax sets up two prototypes:
     // for the built-in Object constructor, 
     Object.__proto__ === Function.prototype .
    ```
+## var
+1. Variables, declared with var, are either function-scoped or global-scoped. They are visible through blocks.
+2. The same thing for loops: var cannot be block- or loop-local like in for loop. If declared with var, it's visible after for loop
+3. If a code block is inside a function, then var becomes a function-level variable
+4. “var” tolerates redeclarations. If we declare the same variable with let twice in the same scope, that’s an error
+5. “var” variables can be declared below their use because they are hoisted. Declarations are hoisted, but assignments are not
+
+## Global Object (Window in browser, for Node.js it is global)
+7. In-browser, unless we’re using modules, global functions and variables declared with var become a property of the global object.
+8. If a value is so important that you’d like to make it available globally, write it directly as a property. That said, using global variables is generally discouraged.
+```javascript
+  window.currentUser = {
+    name: "John"
+  };
+```
+8. We use the global object to test for support of modern language features. For instance, test if a built-in Promise object exists (it doesn’t in really old browsers). If there’s none (say, we’re in an old browser), we can create “polyfills”: add functions that are not supported by the environment, but exist in the modern standard.
+```javascript
+  if (!window.Promise) {
+    window.Promise = ... // custom implementation of the modern language feature
+  }
+```
 
 ## Error scenarios
 1.
