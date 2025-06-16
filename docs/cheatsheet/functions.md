@@ -273,3 +273,29 @@ Arrow functions and regular functions in JavaScript are similar in many ways, bu
 4. **Constructors and prototypes**: Regular functions, when used with the `new` keyword, can act as constructors. Arrow functions, however, do not have a `prototype` property and cannot act as constructors, so they can't be used with `new`.
 
 5. **Method definitions**: If you're defining a method in an object literal, a method definition or a regular function is often preferable, because it's shorter than an arrow function and it keeps the correct `this` context.
+
+## Decorators and forwarding, call/apply
+Forward calls between functions and decorate them.
+
+Transparent caching - If the function is called often, we may want to cache (remember) the results to avoid spending extra-time on recalculations. If the function is called often, we may want to cache (remember) the results to avoid spending extra-time on recalculations. In the code below **cachingDecorator** is a decorator: a special function that takes another function and alters its behavior.
+```javascript
+  function slow(x) {
+    // there can be a heavy CPU-intensive job here
+    alert(`Called with ${x}`);
+    return x;
+  }
+  function cachingDecorator(func) {
+    let cache = new Map();
+    return function(x) {
+      if (cache.has(x)) { // if there's such key in cache
+        return cache.get(x); // read the result from it
+      }
+      let result = func(x); // otherwise call func
+      cache.set(x, result); // and cache (remember) the result
+      return result;
+      };
+  }
+  slow = cachingDecorator(slow);
+  alert( slow(1) ); // slow(1) is cached and the result returned
+  alert( "Again: " + slow(1) ); // slow(1) result returned from cache
+```
