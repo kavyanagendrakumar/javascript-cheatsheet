@@ -1,3 +1,4 @@
+## Function
 In JavaScript, functions are objects. A good way to imagine functions is as callable “action objects”. We can not only call them, but also treat them as objects: add/remove properties, pass by reference etc.
 
 1. The “name” property - a function’s name is accessible as the “name” property. Object methods have names too:
