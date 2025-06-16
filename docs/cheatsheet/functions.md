@@ -384,7 +384,6 @@ There’s only a subtle difference regarding args:
 2. The apply accepts only array-like args.
 
 ## Method Borrowing
-We take (borrow) a join method from a regular array ( [].join) and use [].join.call to run it in the context of arguments. Why does it work? That’s because the internal algorithm of the native method arr.join(glue) is very simple. technically it takes this and joins this[0], this[1] …etc together. It’s intentionally written in a way that allows any array-like this (not a coincidence, many methods follow this practice). That’s why it also works with this=arguments.
 ```javascript
   function hash() {
     alert( arguments.join() ); // Error: arguments.join is not a function
@@ -396,4 +395,5 @@ We take (borrow) a join method from a regular array ( [].join) and use [].join.c
   }
   hash(1, 2);
 ```
+We take (borrow) a join method from a regular array ( [].join) and use [].join.call to run it in the context of arguments. Why does it work? That’s because the internal algorithm of the native method arr.join(glue) is very simple. technically it takes this and joins this[0], this[1] …etc together. It’s intentionally written in a way that allows any array-like this (not a coincidence, many methods follow this practice). That’s why it also works with this=arguments.
 
