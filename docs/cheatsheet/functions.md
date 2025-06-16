@@ -269,13 +269,13 @@ Arrow functions and regular functions in JavaScript are similar in many ways, bu
     obj2.createArrowFunction()(); // 'a'
     ```
 
-3. **Arguments object**: Regular functions have an "arguments" object which contains all the arguments passed to the function. It is an array-like iterable object not arrays. Arrow functions do not have an "arguments" object. If you need to access arguments with an arrow function, you can use rest parameters instead.
+3. **Arguments object**: Regular functions have an "arguments" object which contains all the arguments passed to the function. It is an array-like iterable object not an array. Arrow functions do not have an "arguments" object. If you need to access arguments with an arrow function, you can use rest parameters instead.
 
 4. **Constructors and prototypes**: Regular functions, when used with the `new` keyword, can act as constructors. Arrow functions, however, do not have a `prototype` property and cannot act as constructors, so they can't be used with `new`.
 
 5. **Method definitions**: If you're defining a method in an object literal, a method definition or a regular function is often preferable, because it's shorter than an arrow function and it keeps the correct `this` context.
 
-## Decorators and forwarding, call/apply
+## Decorators and forwarding, call/apply. 
 Forward calls between functions and decorate them.
 
 Transparent caching - If the function is called often, we may want to cache (remember) the results to avoid spending extra-time on recalculations. If the function is called often, we may want to cache (remember) the results to avoid spending extra-time on recalculations. In the code below **cachingDecorator** is a decorator: a special function that takes another function and alters its behavior.
@@ -301,8 +301,8 @@ Transparent caching - If the function is called often, we may want to cache (rem
   alert( "Again: " + slow(1) ); // slow(1) result returned from cache
 ```
 
-## Using “func.call” for the context
-The caching decorator mentioned above is not suited to work with object methods. 
+## Using “func.call/apply” for the context - Call forwarding 
+The caching decorator mentioned above is not suited to work with object methods. Passing all arguments along with the context to another function is called call forwarding.
 ```javascript
   // we'll make worker.slow caching
   let worker = {
@@ -378,3 +378,22 @@ In our case, we can use call in the wrapper to pass the context to the original 
 ```
 
 ## func.apply
+The only syntax difference between call and apply is that call expects a list of arguments, while apply takes an array-like object with them. And for objects that are both iterable and array-like, such as a real array, we can use any of them, but apply will probably be faster, because most JavaScript engines internally optimize it better.
+There’s only a subtle difference regarding args:
+1. The spread syntax ... allows to pass iterable args as the list to call.
+2. The apply accepts only array-like args.
+
+## Method Borrowing
+We take (borrow) a join method from a regular array ( [].join) and use [].join.call to run it in the context of arguments. Why does it work? That’s because the internal algorithm of the native method arr.join(glue) is very simple. technically it takes this and joins this[0], this[1] …etc together. It’s intentionally written in a way that allows any array-like this (not a coincidence, many methods follow this practice). That’s why it also works with this=arguments.
+```javascript
+  function hash() {
+    alert( arguments.join() ); // Error: arguments.join is not a function
+  }
+  hash(1, 2);
+
+  function hash() {
+    alert( [].join.call(arguments) ); // 1,2
+  }
+  hash(1, 2);
+```
+
