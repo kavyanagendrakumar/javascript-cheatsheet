@@ -545,3 +545,56 @@ JavaScript itself does not ensure the right "constructor" value. In particular, 
   alert(rabbit.constructor === Rabbit); // false
 ```
 
+## Native prototypes - adding new capabilities to built-in objects
+All built-in objects such as Array, Date, Function and others also keep methods in prototypes. All of the built-in prototypes have Object.prototype on the top. Please note that there is no more [[Prototype]] in the chain above Object.prototype. 
+
+Some methods in prototypes may overlap, for instance, Array.prototype has its own toString that lists comma-delimited elements. Object.prototype has toString as well, but Array.prototype is closer in the chain, so the array variant is used. Chrome developer console also show inheritance ( console.dir may need to be used for built-in objects). Other built-in objects also work the same way. Even functions – they are objects of a built-in Function constructor, and their methods ( call/ apply and others) are taken from Function.prototype. Functions have their own toString too.
+
+```javascript
+  let arr = [1, 2, 3];
+  // it inherits from Array.prototype?
+  alert( arr.__proto__ === Array.prototype ); // true
+  // then from Object.prototype?
+  alert( arr.__proto__.__proto__ === Object.prototype ); // true
+  // and null on the top.
+  alert( arr.__proto__.__proto__.__proto__ ); // null
+
+  // Changing native prototype
+  String.prototype.show = function() {
+    alert(this);
+  };
+  "BOOM!".show(); // BOOM!
+```
+Changing native prototypes - Native prototypes can be modified. For instance, if we add a method to String.prototype, it becomes available to all strings. But that is generally a bad idea. Prototypes are global, so it’s easy to get a conflict. If two libraries add a method String.prototype.show, then one of them will be overwriting the method of the other. In modern programming, there is only one case where modifying native prototypes is approved. That’s polyfilling. Polyfilling is a term for making a substitute for a method that exists in the JavaScript specification, but is not yet supported by a particular JavaScript engine
+```javascript
+  if (!String.prototype.repeat) { // if there's no such method
+  // add it to the prototype
+  String.prototype.repeat = function(n) {
+    // repeat the string n times
+    // actually, the code should be a little bit more complex than that
+    // (the full algorithm is in the specification)
+    // but even an imperfect polyfill is often considered good enough
+    return new Array(n + 1).join(this);
+    };
+  }
+  alert( "La".repeat(3) ); // LaLaLa
+```
+
+**Borrowing from prototypes**
+Method borrowing means take a method from one object and copy it into another. Some methods of native prototypes are often borrowed. For instance, if we’re making an array-like object, we may want to copy some Array methods to it. Another possibility is to inherit by setting obj.__proto__ to Array.prototype, so all Array methods are automatically available in obj. But that’s impossible if obj already inherits from another object. Borrowing methods is flexible, it allows to mix functionalities from different objects if needed.
+```javascript
+    let obj = {
+      0: "Hello",
+      1: "world!",
+      length: 2,
+  };
+  obj.join = Array.prototype.join; //It works because the internal algorithm of the built-in join method only cares about the correct indexes and the length
+property. It doesn’t check if the object is indeed an array. Many built-in methods are like that.
+  alert( obj.join(',') ); // Hello,world!
+```
+All built-in objects follow the same pattern:
+1. The methods are stored in the prototype ( Array.prototype, Object.prototype, Date.prototype, etc.)
+2. The object itself stores only the data (array items, object properties, the date)
+
+
+
