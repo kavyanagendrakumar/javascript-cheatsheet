@@ -13,6 +13,7 @@ class User {
   constructor(name) {
     this.name = name;
   }
+  age = '35' // Class field - set on individual objects, not User.prototype
   get name() { //Getters/setters - Just like literal objects, classes may include getters/setters, computed properties etc.
     return this._name;
   }
@@ -36,9 +37,14 @@ When new User("John") is called:
 2. The constructor runs with the given argument and assigns it to this.name.
 
 In JavaScript, a class is a kind of function. What class User {...} construct really does is:
-1. Creates a function named User, that becomes the result of the class declaration. The function code is taken from the
-constructor method (assumed empty if we don’t write such method).
-2. Stores class methods, such as sayHi, in User.prototype.
+1. Creates a function named User, that becomes the result of the class declaration. The function code is taken from the constructor method (assumed empty if we don’t write such method).
+2. Stores class methods, getters, setters such as sayHi, in User.prototype.
+
+| Field Type        | Location            | Shared? | Created When?      | On Prototype? |
+| ----------------- | ------------------- | ------- | ------------------ | ------------- |
+| Class Field       | Outside constructor | ❌ No    | Before constructor | ❌ No          |
+| Constructor Field | Inside constructor  | ❌ No    | During constructor | ❌ No          |
+
    
 ```javascript
   class User {
@@ -79,5 +85,188 @@ function makeClass(phrase) {
   };
 }
 ```
+**Making bound methods with class fields**
+If an object method is passed around and called in another context, this won’t be a reference to its object any more
+There are two approaches to fixing it, as discussed in the chapter Function binding:
+1. Pass a wrapper-function, such as setTimeout(() => button.click(), 1000).
+2. Bind the method to object, e.g. in the constructor.
+3.** Using arrow function. The class field click = () => {...} is created on a per-object basis. with 'this' inside it referencing that object.**
+
+```javascript
+  class Button {
+    constructor(value) {
+      this.value = value;
+    }
+    click = () => {
+      alert(this.value);
+    }
+  }
+  let button = new Button("hello");
+  setTimeout(button.click, 1000); // hello //'this' inside click refers to the Button instance
+```
+
+## Class Inheritance
+Class inheritance is a way for one class to extend another class. Internally, extends keyword works using the good old prototype mechanics. 
+
+1. It sets Rabbit.prototype. [[Prototype]] to Animal.prototype. So, if a method is not found in Rabbit.prototype, JavaScript takes it from Animal.prototype.
+2. Class fields are created per instance
+
+```javascript
+  class Rabbit extends Animal {
+    // if a class extends another class and has no constructor, then the following “empty” constructor is generated.
+    constructor(...args) {
+      super(...args);
+    }
+  // Constructors in inheriting classes must call super(...), and (!) do it before using this.
+    constructor(name, earLength) {
+      super(name);  // call parent constructor
+      this.speed = 0;
+      this.earLength = earLength;
+    }
+    hide() {
+      alert(`${this.name} hides!`);
+    }
+    stop() {
+      super.stop(); // call parent stop
+      this.hide(); // and then hide
+    }
+  }
+let rabbit = new Rabbit("White Rabbit");
+```
+**Overriding a method**
+Usually, however, we don’t want to totally replace a parent method, but rather to build on top of it to tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process. Classes provide "super" keyword for that.
+1. super.method(...) to call a parent method. Arrow functions have no super. As was mentioned in the chapter Arrow functions revisited, arrow functions do not have super. If accessed, it’s taken from the outer function. 
+2. super(...) to call a parent constructor (inside our constructor only).
+
+**Overriding constructor**
+According to the specification, if a class extends another class and has no constructor, then the following “empty” constructor is generated.
+In JavaScript, there’s a distinction between a constructor function of an inheriting class (so-called “derived constructor”) and other functions. A derived constructor has a special internal property [[**ConstructorKind**]]:"derived". That’s a special internal label.
+That label affects its behavior with new.
+1. When a regular function is executed with new, it creates an empty object and assigns it to this.
+2. But when a derived constructor runs, it doesn’t do this. It expects the parent constructor to do this job.
+So a derived constructor must call super in order to execute its parent (base) constructor, otherwise the object for this won’t be created. And we’ll get an error.
+
+**Overriding class fields** - read again https://javascript.info/class-inheritance 
+
+## Static properties and methods
+Static properties are used when we’d like to store class-level data, also not bound to an instance. In a class declaration, they are prepended by static keyword, like this.  That actually does the same as assigning it as a property directly to the class. The value of this in User.staticMethod() call is the class constructor User itself (the “object before dot” rule). Usually, static methods are used to implement functions that belong to the class as a whole, but not to any particular object of it.
+
+Static methods are also used in database-related classes to search/save/remove entries from the database, like this. Static methods aren’t available for individual objects
+```javascript
+  class Article {
+    static staticMethod() {
+      alert(this === Article);
+    }
+    static compare(articleA, articleB) {
+      return articleA.date - articleB.date;
+    }
+  }
+  Article.staticMethod(); // true
+  // usage
+  let articles = [
+    new Article("HTML", new Date(2019, 1, 1)),
+    new Article("CSS", new Date(2019, 0, 1)),
+    new Article("JavaScript", new Date(2019, 11, 1))
+  ];
+articles.sort(Article.compare);
+  // static method to remove the article by id:
+  Article.remove({id: 12345});
+```
+
+**Static properties**
+That is the same as a direct assignment to Article:
+```javascript
+  class Article {
+    static publisher = "Ilya Kantor";
+  }
+  alert( Article.publisher ); // Ilya Kantor
+```
+
+**Inheritance of static properties and methods**
+Static properties and methods are inherited.
+For instance, Animal.compare and Animal.planet in the code below are inherited and accessible as Rabbit.compare and Rabbit.planet:
+So, Rabbit extends Animal creates two [[Prototype]] references:
+1. Rabbit function prototypally inherits from Animal function.
+2. Rabbit.prototype prototypally inherits from Animal.prototype.
+As a result, inheritance works both for regular and static methods. Check https://javascript.info/static-properties-methods for diagram
+```javascript
+  class Animal {}
+  class Rabbit extends Animal {}
+  // for statics
+  alert(Rabbit.__proto__ === Animal); // true
+  // for regular methods
+  alert(Rabbit.prototype.__proto__ === Animal.prototype); // true
+```
+For class B extends A the prototype of the class B itself points to A: B.[[Prototype]] = A. So if a field is not found in B, the search continues in A.
+
+## Encapsulation - Private and protected properties and methods
+One of the most important principles of object oriented programming – delimiting internal interface from the external one.
+In object-oriented programming, properties and methods are split into two groups:
+1. Internal interface – methods and properties, accessible from other methods of the class, but not from the outside.
+2. External interface – methods and properties, accessible also from outside the class.
+
+In JavaScript, there are two types of object fields (properties and methods):
+1.Public: accessible from anywhere. They comprise the external interface. Until now we were only using public properties and methods.
+2.Private: accessible only from inside the class. These are for the internal interface.
+
+Javascript does not have protected fields so they are emulated.. “protected” fields: accessible only from inside the class and those extending it (like private, but plus access from inheriting classes)
+**Protected** properties are usually prefixed with an underscore _. If we inherit class MegaMachine extends CoffeeMachine, then nothing prevents us from accessing this._waterAmount or this._power from the methods of the new class. **So protected fields are naturally inheritable. **
+```javascript 
+  class CoffeeMachine {
+  _waterAmount = 0; //Protected
+    set waterAmount(value) {
+      if (value < 0) {
+      value = 0;
+    }
+    this._waterAmount = value;
+    }
+    get waterAmount() {
+      return this._waterAmount;
+    }
+    constructor(power) {
+      this._power = power; //Protected and Readonly because there is no setter
+    }
+    get power() {
+      return this._power;
+    }
+  }
+  // create the coffee machine
+  let coffeeMachine = new CoffeeMachine(100);
+  // add water
+  coffeeMachine.waterAmount = -10; // _waterAmount will become 0, not -10
+  coffeeMachine.power = 25; // Error (no setter)
+```
+**Read-only “power”**
+For power property, let’s make it read-only. It sometimes happens that a property must be set at creation time only, and then never modified.
+
+**Private** “#waterLimit”
+This is a recent addition to the language. Not supported in JavaScript engines, or supported partially yet, requires polyfilling. 
+1. Privates should start with #.
+2. They are only accessible from inside the class. We can’t access it from outside or from inheriting classes.
+3. Private fields do not conflict with public ones. We can have both private #waterAmount and public waterAmount fields at the same time.
+4. Unlike protected ones, private fields are enforced by the language itself.
+5. With private fields: this['#waterLimit'] doesn’t work. That’s a syntax limitation to ensure privacy.
+```javascript
+  class CoffeeMachine {
+  #waterLimit = 200;
+  #fixWaterAmount(value) {
+    if (value < 0) return 0;
+    if (value > this.#waterLimit) return this.#waterLimit;
+  }
+  setWaterAmount(value) {
+    this.#waterLimit = this.#fixWaterAmount(value);
+  }
+  }
+  let coffeeMachine = new CoffeeMachine();
+  // can't access privates from outside of the class
+  coffeeMachine.#fixWaterAmount(123); // Error
+  coffeeMachine.#waterLimit = 1000; // Error
+```
+To hide an internal interface we use either protected or private properties:
+1.  Protected fields start with _. That’s a well-known convention, not enforced at the language level. Programmers should only access a field starting with _ from its class and classes inheriting from it.
+2. Private fields start with #. JavaScript makes sure we can only access those from inside the class.
+
+## Extending built-in classes
+
 
 
