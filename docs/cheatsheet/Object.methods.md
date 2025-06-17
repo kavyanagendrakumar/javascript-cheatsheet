@@ -415,16 +415,6 @@ structuredClone({
 f: function() {}
 });
 ```
-
-**Object.create()**
-creates new object, using an existing object as the prototype
- 
-```javascript
-// example
-Object.create({ a: 1 }) // <prototype>: Object { a: 1 }
-// syntax
-Object.create(proto, [propertiesObject])
-```
 **Object.defineProperties()**
 defines new or modifies existing properties.
 
@@ -541,18 +531,6 @@ obj[b] = 'someSymbol' // obj = { a: 1, Symbol(b): "symbol" }
 Object.getOwnPropertySymbols(obj) // [ Symbol(b) ]
 // syntax
 Object.getOwnPropertySymbols(obj)
-```
-**Object.getPrototypeOf()**
-returns the prototype
- 
-```javascript
-// example
-const proto = { a: 1 }
-const obj = Object.create(proto)
-obj.b = 2 // obj = { b: 2 }
-Object.getPrototypeOf(obj) // { a: 1 }
-// syntax
-Object.getPrototypeOf(obj)
 ```
 **Object.is()**
 determines whether two values are the same value
@@ -696,6 +674,46 @@ The property [[Prototype]] is internal and hidden, but there are many ways to se
 2. methods are shared, but the object state is not
 3. The for..in loop iterates over inherited properties too.
 4. key/value-getting methods, such as Object.keys, Object.values and so on ignore inherited properties.
+5. Methods defined inside the object are stored in the object itself not in prototype. Only methods inside __proto__ are in prototype.
+6. prototype-less objects, created with Object.create(null) or {__proto__: null}. These objects are used as dictionaries, to store any (possibly user-generated) keys including __proto__ as regular property name and not as get/set for [[Prototype]]
+
+**Object.create()**
+creates new object, using an existing object as the prototype. shallow-copy with all descriptors
+ 
+```javascript
+// example
+Object.create({ a: 1 }) // <prototype>: Object { a: 1 }
+// syntax
+Object.create(proto, [propertiesObject])
+
+let animal = {
+  eats: true
+};
+// create a new object with animal as a prototype
+let rabbit = Object.create(animal); // same as {__proto__: animal}
+alert(rabbit.eats); // true
+alert(Object.getPrototypeOf(rabbit) === animal); // true
+Object.setPrototypeOf(rabbit, {}); // change the prototype of rabbit to {}
+
+// Object clone - This call makes a truly exact copy of obj, including all properties: enumerable and non-enumerable, data properties and
+// setters/getters – everything, and with the right [[Prototype]].
+let clone = Object.create(
+  Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj)
+);
+```
+
+**Object.getPrototypeOf()**
+returns the [[Prototype]] of obj
+ 
+```javascript
+// example
+const proto = { a: 1 }
+const obj = Object.create(proto)
+obj.b = 2 // obj = { b: 2 }
+Object.getPrototypeOf(obj) // { a: 1 }
+// syntax
+Object.getPrototypeOf(obj)
+```
 
 **Object.prototype.hasOwnProperty()**
 returns boolean indicating whether object has the specified property. excludes inherited properties
