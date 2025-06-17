@@ -225,23 +225,6 @@ let result = square(5); // result is now 25
 
 `square` is an arrow function that takes one parameter, `x`, and returns its square.
 
-## Arrow Functions vs Regular Functions
-
-Arrow functions and regular functions in JavaScript are similar in many ways, but there are some key differences:
-
-1. **Syntax**: Arrow functions have a shorter syntax compared to function expressions. Here's a comparison:
-
-    ```javascript
-    // Regular function
-    let add = function(a, b) {
-      return a + b;
-    }
-
-    // Arrow function
-    let add = (a, b) => a + b;
-    ```
-
-2. **`this` keyword**: In regular functions, the `this` keyword represents the object that called the function. In arrow functions, `this` is lexically bound. It means that it uses `this` from the code that contains the arrow function.
 1. Arrow functions come in handy where we usually don’t want to leave the current context.
 2. Not having this naturally means another limitation: arrow functions can’t be used as constructors. They can’t be called with new.
 3. Arrow functions VS bind - The arrow => doesn’t create any binding. The function simply doesn’t have this. The lookup of this is made exactly the same way as a regular variable search: in the outer lexical environment.
@@ -295,6 +278,24 @@ Arrow functions and regular functions in JavaScript are similar in many ways, bu
         };
       }
     ```
+
+## Arrow Functions vs Regular Functions
+
+Arrow functions and regular functions in JavaScript are similar in many ways, but there are some key differences:
+
+1. **Syntax**: Arrow functions have a shorter syntax compared to function expressions. Here's a comparison:
+
+    ```javascript
+    // Regular function
+    let add = function(a, b) {
+      return a + b;
+    }
+
+    // Arrow function
+    let add = (a, b) => a + b;
+    ```
+
+2. **`this` keyword**: In regular functions, the `this` keyword represents the object that called the function. In arrow functions, `this` is lexically bound. It means that it uses `this` from the code that contains the arrow function.
 
 5. **Arguments object**: Regular functions have an "arguments" object which contains all the arguments passed to the function. It is an array-like iterable object not an array. Arrow functions do not have an "arguments" object. If you need to access arguments with an arrow function, you can use rest parameters instead.
 
