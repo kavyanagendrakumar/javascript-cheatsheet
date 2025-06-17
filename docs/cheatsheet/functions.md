@@ -530,7 +530,9 @@ Every function has the "prototype" property even if we don’t supply it. The de
   let rabbit = new Rabbit(); // inherits from {constructor: Rabbit}
   alert(rabbit.constructor == Rabbit); // true (from prototype)
 
-  // We can use constructor property to create a new object using the same constructor as the existing one. That’s handy when we have an object, don’t know which constructor was used for it (e.g. it comes from a 3rd party     // library), and we need to create another one of the same kind.
+  // We can use constructor property to create a new object using the same constructor as the existing one.
+  // That’s handy when we have an object, don’t know which constructor was used for it (e.g. it comes from a 3rd party library)
+  // , and we need to create another one of the same kind.
   let rabbit2 = new rabbit.constructor("Black Rabbit");
 ```
 JavaScript itself does not ensure the right "constructor" value. In particular, if we replace the default prototype as a whole, then there will be no "constructor" in it. So, to keep the right "constructor" we can choose to add/remove properties to the default "prototype" instead of overwriting it as a whole:
