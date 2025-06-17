@@ -690,7 +690,7 @@ The property [[Prototype]] is internal and hidden, but there are many ways to se
   };
   rabbit.walk(); // Rabbit! Bounce-bounce!
 ```
-![Uploading Screenshot 2025-06-17 at 8.50.36 AM.png…]()
+![Uploading Screenshot 2025-06-17 at 8.55.21 AM.png…]()
 
 1. 'this' is not affected by prototypes at all. No matter where the method is found: in an object or its prototype. In a method call, this is always the object before the dot.
 2. methods are shared, but the object state is not
@@ -874,9 +874,7 @@ objectName = {
     // The same thing happening here. We're saying '`I'm ${objectName.age} years old.'
     
   }
-}   
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+}  
 objectName.sayMyAge();   // "Bonjour Mathieu."
                         //  "I'm 25 years old."
 ```
