@@ -241,7 +241,11 @@ Arrow functions and regular functions in JavaScript are similar in many ways, bu
     let add = (a, b) => a + b;
     ```
 
-2. **`this` keyword**: In regular functions, the `this` keyword represents the object that called the function. In arrow functions, `this` is lexically bound. It means that it uses `this` from the code that contains the arrow function. For example:
+2. **`this` keyword**: In regular functions, the `this` keyword represents the object that called the function. In arrow functions, `this` is lexically bound. It means that it uses `this` from the code that contains the arrow function.
+1. Arrow functions come in handy where we usually don’t want to leave the current context.
+2. Not having this naturally means another limitation: arrow functions can’t be used as constructors. They can’t be called with new.
+3. Arrow functions VS bind - The arrow => doesn’t create any binding. The function simply doesn’t have this. The lookup of this is made exactly the same way as a regular variable search: in the outer lexical environment.
+4. Arrow functions also have no arguments variable. That’s great for decorators, when we need to forward a call with the current this and arguments.
 
     ```javascript
     // Regular function
@@ -267,13 +271,36 @@ Arrow functions and regular functions in JavaScript are similar in many ways, bu
     };
 
     obj2.createArrowFunction()(); // 'a'
+
+
+    //Decorator
+      function defer(f, ms) {
+        return function() {
+        setTimeout(() => f.apply(this, arguments), ms);
+        };
+      }
+      function sayHi(who) {
+        alert('Hello, ' + who);
+      }
+      let sayHiDeferred = defer(sayHi, 2000);
+      sayHiDeferred("John"); // Hello, John after 2 seconds
+
+      // The same without an arrow function would look like:
+      function defer(f, ms) {
+        return function(...args) {
+          let ctx = this;
+          setTimeout(function() {
+            return f.apply(ctx, args);
+          }, ms);
+        };
+      }
     ```
 
-3. **Arguments object**: Regular functions have an "arguments" object which contains all the arguments passed to the function. It is an array-like iterable object not an array. Arrow functions do not have an "arguments" object. If you need to access arguments with an arrow function, you can use rest parameters instead.
+5. **Arguments object**: Regular functions have an "arguments" object which contains all the arguments passed to the function. It is an array-like iterable object not an array. Arrow functions do not have an "arguments" object. If you need to access arguments with an arrow function, you can use rest parameters instead.
 
-4. **Constructors and prototypes**: Regular functions, when used with the `new` keyword, can act as constructors. Arrow functions, however, do not have a `prototype` property and cannot act as constructors, so they can't be used with `new`.
+6. **Constructors and prototypes**: Regular functions, when used with the `new` keyword, can act as constructors. Arrow functions, however, do not have a `prototype` property and cannot act as constructors, so they can't be used with `new`.
 
-5. **Method definitions**: If you're defining a method in an object literal, a method definition or a regular function is often preferable, because it's shorter than an arrow function and it keeps the correct `this` context.
+7. **Method definitions**: If you're defining a method in an object literal, a method definition or a regular function is often preferable, because it's shorter than an arrow function and it keeps the correct `this` context.
 
 ## Decorators and forwarding, call/apply. 
 Forward calls between functions and decorate them.
