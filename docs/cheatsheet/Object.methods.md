@@ -627,8 +627,78 @@ Object.defineProperty(obj, 'b', { value: 2 }) // Error: Can't define property "b
 // syntax
 Object.preventExtensions(obj)
 ```
+**Object.seal()**
+prevents new properties from being added and marks all existing properties as non-configurable
+ 
+```javascript
+// example
+const obj = { a: 1 }
+Object.seal(obj)
+obj.a = 2 // { a: 2 }
+obj.b = 3 // error in strict mode
+delete obj.a // error in strict mode
+// syntax
+Object.seal(obj)
+```
+**Object.values()**
+returns array of object's own enumerable property values
+ 
+```javascript
+// example
+Object.values({ a: 1, b: 'a'}) // [ 1, "a" ]
+// syntax
+Object.values(obj)
+```
+
+## Prototype
+In programming, we often want to take something and extend it. Not copy/reimplement its methods, just build a new object on top of it. Prototypal inheritance is a language feature that helps in that.
+**[[Prototype]]** - In JavaScript, objects have a special hidden property [[Prototype]] (as named in the specification), that is either null or references another object. That object is called “a prototype”. When we read a property from object, and it’s missing, JavaScript automatically takes it from the prototype. In programming, this is called “prototypal inheritance”.  
+
+There are only two limitations:
+1. The references can’t go in circles. JavaScript will throw an error if we try to assign __proto__ in a circle.
+2. The value of __proto__ can be either an object or null. Other types are ignored.
+Also it may be obvious, but still: there can be only one [[Prototype]]. An object may not inherit from two others.
+
+The property [[Prototype]] is internal and hidden, but there are many ways to set it. 
+1. One of them is to use the special name __proto__, like this. Please note that __proto__ is not the same as the internal [[Prototype]] property. It’s a getter/setter for [[Prototype]]. This way is a bit outdated
+2. Object.getPrototypeOf/Object.setPrototypeOf
+
+```javascript
+  let animal = {
+    eats: true,
+    walk() {
+    /* this method won't be used by rabbit */
+    }
+  };
+  let rabbit = {
+    jumps: true
+  };
+  rabbit.__proto__ = animal; // (*)
+
+  //Or
+  let rabbit = {
+    jumps: true,
+    __proto__: animal
+  };
+  // we can find both properties in rabbit now:
+  alert( rabbit.eats ); // true (**)
+  alert( rabbit.jumps ); // true
+
+  // The prototype is only used for reading properties. Write/delete operations work directly with the object.
+  rabbit.walk = function() {
+    alert("Rabbit! Bounce-bounce!");
+  };
+  rabbit.walk(); // Rabbit! Bounce-bounce!
+```
+![Uploading Screenshot 2025-06-17 at 8.50.36 AM.png…]()
+
+1. 'this' is not affected by prototypes at all. No matter where the method is found: in an object or its prototype. In a method call, this is always the object before the dot.
+2. methods are shared, but the object state is not
+3. The for..in loop iterates over inherited properties too.
+4. key/value-getting methods, such as Object.keys, Object.values and so on ignore inherited properties.
+
 **Object.prototype.hasOwnProperty()**
-returns boolean indicating whether object has the specified property
+returns boolean indicating whether object has the specified property. excludes inherited properties
  
 ```javascript
 // example
@@ -673,28 +743,7 @@ arr.toString() // "a,b"
 // syntax
 obj.toString()
 ```
-**Object.seal()**
-prevents new properties from being added and marks all existing properties as non-configurable
- 
-```javascript
-// example
-const obj = { a: 1 }
-Object.seal(obj)
-obj.a = 2 // { a: 2 }
-obj.b = 3 // error in strict mode
-delete obj.a // error in strict mode
-// syntax
-Object.seal(obj)
-```
-**Object.values()**
-returns array of object's own enumerable property values
- 
-```javascript
-// example
-Object.values({ a: 1, b: 'a'}) // [ 1, "a" ]
-// syntax
-Object.values(obj)
-```
+
 **Creating**
 ```javascript
 const objectName = {};
