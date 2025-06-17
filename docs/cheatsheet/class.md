@@ -267,6 +267,50 @@ To hide an internal interface we use either protected or private properties:
 2. Private fields start with #. JavaScript makes sure we can only access those from inside the class.
 
 ## Extending built-in classes
+Built-in classes like Array, Map and others are extendable also.
+```javascript
+  // add one more method to it (can do more)
+  class PowerArray extends Array {
+    isEmpty() {
+      return this.length === 0;
+    }
+  }
+  let arr = new PowerArray(1, 2, 5, 10, 50);
+  alert(arr.isEmpty()); // false
+  let filteredArr = arr.filter(item => item >= 10);
+  alert(filteredArr); // 10, 50
+  alert(filteredArr.isEmpty()); // false
 
+  arr.constructor === PowerArray // Check below for how proptotype chain works
+```
+Built-in methods like filter, map and others – return new objects of exactly the inherited type PowerArray. Their internal implementation uses the object’s constructor property for that. When arr.filter() is called, it internally creates the new array of results using exactly arr.constructor, not basic Array. 
+When you access arr.constructor, JavaScript does the following:
+1.Look for constructor directly on arr
+2. arr.hasOwnProperty('constructor') → false
+3. Not found? Then go to arr.__proto__
+4. This is PowerArray.prototype
+5. Check PowerArray.prototype.constructor
+Found! It points to PowerArray
 
+We can add a special static getter Symbol.species to the class. If it exists, it should return the constructor that JavaScript will use internally to create new entities in map, filter and so on. If we’d like built-in methods like map or filter to return regular arrays, we can return Array in Symbol.species. Other collections, such as Map and Set, work alike. They also use Symbol.species.
+```javascript
+  class PowerArray extends Array {
+    isEmpty() {
+      return this.length === 0;
+    }
+    // built-in methods will use this as the constructor
+    static get [Symbol.species]() {
+      return Array;
+    }
+  }
+  let arr = new PowerArray(1, 2, 5, 10, 50);
+  alert(arr.isEmpty()); // false
+  // filter creates new array using arr.constructor[Symbol.species] as constructor
+  let filteredArr = arr.filter(item => item >= 10);
+  // filteredArr is not PowerArray, but Array
+  alert(filteredArr.isEmpty()); // Error: filteredArr.isEmpty is not a function
+```
+**No static inheritance in built-ins**
+Built-in objects have their own static methods, for instance Object.keys, Array.isArray etc. But built-in classes are an exception. **They don’t inherit statics from each other.**
+For example, both Array and Date inherit from Object, so their instances have methods from Object.prototype. But Array.[[Prototype]] does not reference Object, so there’s no, for instance, Array.keys() (or Date.keys()) static method. there’s no link between Date and Object. They are independent, only Date.prototype inherits from Object.prototype. That’s an important difference of inheritance between built-in objects compared to what we get with extends.
 
