@@ -496,3 +496,50 @@ Fortunately, a function partial for binding only arguments can be easily impleme
   // Something like:
   // [10:00] John: Hello!
 ```
+
+## F.Prototype - way of setting a [[Prototype]] for objects created via a constructor function.
+If F is a constructor function and F.prototype is an object, then the new operator uses it to set [[Prototype]] for the new object. F.prototype here means a regular property named "prototype" on F. The value of F.prototype should be either an object or null: other values won’t work. The "prototype" property only has such a special effect when set on a constructor function, and invoked with new. On regular objects the prototype is nothing special
+```javascript
+  let user = {
+  name: "John",
+  prototype: "Bla-bla" // no magic at all
+};
+```
+
+F.prototype property is only used when new F is called, it assigns [[Prototype]] of the new object. If, after the creation, F.prototype property changes ( F.prototype = <another object>), then new objects created by new F will have another object as [[Prototype]], but already existing objects keep the old one.
+```javascript
+  let animal = {
+    eats: true
+  };
+  function Rabbit(name) {
+    this.name = name;
+  }
+  Rabbit.prototype = animal;
+  // Setting Rabbit.prototype = animal literally states the following: “When a new Rabbit is created, assign its [[Prototype]] to animal”.
+  let rabbit = new Rabbit("White Rabbit"); // rabbit.__proto__ == animal
+  alert( rabbit.eats ); // true
+```
+Every function has the "prototype" property even if we don’t supply it. The default "prototype" is an object with the only property constructor that points back to the function itself.
+```javascript
+  function Rabbit() {}
+  /* default prototype
+  Rabbit.prototype = { constructor: Rabbit };
+  */
+  alert( Rabbit.prototype.constructor == Rabbit ); // true
+
+  let rabbit = new Rabbit(); // inherits from {constructor: Rabbit}
+  alert(rabbit.constructor == Rabbit); // true (from prototype)
+
+  // We can use constructor property to create a new object using the same constructor as the existing one. That’s handy when we have an object, don’t know which constructor was used for it (e.g. it comes from a 3rd party     // library), and we need to create another one of the same kind.
+  let rabbit2 = new rabbit.constructor("Black Rabbit");
+```
+JavaScript itself does not ensure the right "constructor" value. In particular, if we replace the default prototype as a whole, then there will be no "constructor" in it. So, to keep the right "constructor" we can choose to add/remove properties to the default "prototype" instead of overwriting it as a whole:
+```javascript
+  function Rabbit() {}
+  Rabbit.prototype = {
+    jumps: true
+  };
+  let rabbit = new Rabbit();
+  alert(rabbit.constructor === Rabbit); // false
+```
+
