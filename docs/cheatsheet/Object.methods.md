@@ -260,7 +260,7 @@ myObj.loggerA();    // undefined
 myObj.loggerB();    // 'abc'
 ```
 **getters and setters intercept property access**
-JavaScript getter and setter methods are helpful in part because they offer a way to intercept property access and assignment, and allow for additional actions to be performed before these changes go into effect.
+There are two kinds of object properties. The first kind is data properties. The second type of property is something new. It’s an accessor property. They are essentially functions that execute on getting and setting a value, but look like regular properties to an external code. JavaScript getter and setter methods are helpful in part because they offer a way to intercept property access and assignment, and allow for additional actions to be performed before these changes go into effect.
 ```javascript
 const myCat = {
   _name: 'Snickers',
@@ -274,9 +274,38 @@ const myCat = {
     } else {
       console.log("ERROR: name must be a non-empty string"); 
     }
+  },
+  get fullName() {
+    return `${this.name} ${this.surname}`;
   }
 }
 ```
+**Accessor descriptors**
+For accessor properties, there is no value or writable, but instead there are get and set functions.
+That is, an accessor descriptor may have:
+1. get – a function without arguments, that works when a property is read,
+2. set – a function with one argument, that is called when the property is set,
+3. enumerable – same as for data properties,
+4. configurable – same as for data properties.
+For instance, to create an accessor fullName with defineProperty, we can pass a descriptor with get and set. If we try to supply both get and value in the same descriptor, there will be an error:
+```javascript
+  let user = {
+    name: "John",
+    surname: "Smith"
+  };
+  Object.defineProperty(user, 'fullName', {
+  get() {
+    return `${this.name} ${this.surname}`
+  ;
+  },
+  set(value) {
+    [this.name, this.surname] = value.split(" ");
+  }
+  });
+  alert(user.fullName); // John Smith
+  for(let key in user) alert(key); // name, surname
+```
+
 **javascript factory functions** Refer Constructor, operator "new" for more info. There is more info you need to now than these notes- https://javascript.info/constructor-new 
 A JavaScript function that returns an object is known as a factory function/constructor function. Factory functions often accept parameters in order to customize the returned object. That’s the main purpose of constructors – to implement reusable object creation code. Technically, any function (except arrow functions, as they don’t have this) can be used as a constructor. It can be run with new, and it will execute the algorithm below. The “capital letter first” is a common agreement, to make it clear that a function is to be run with new.
 
@@ -397,7 +426,14 @@ Object.create({ a: 1 }) // <prototype>: Object { a: 1 }
 Object.create(proto, [propertiesObject])
 ```
 **Object.defineProperties()**
-defines new or modifies existing properties
+defines new or modifies existing properties.
+
+Object properties, besides a value, have three special attributes (so-called “flags”). When we create a property “the usual way”, all of them are true. But we also can change them anytime.
+1. writable – if true, the value can be changed, otherwise it’s read-only.
+2. enumerable – if true, then listed in loops, otherwise not listed. We can change writable: true to false for a non-configurable property, thus preventing its value modification (to add another layer of protection). Not the other way around though.
+3. configurable – if true, the property can be deleted and these attributes can be modified, otherwise not. Making a property non-configurable is a one-way road. We cannot change it back with defineProperty. Please note: configurable: false prevents changes of property flags and its deletion, while allowing to change its value.
+
+Now let’s add a custom toString to user. Normally, a built-in toString for objects is non-enumerable, it does not show up in for..in. But if we add a toString of our own, then by default it shows up in for..in
  
 ```javascript
 // example
@@ -407,9 +443,24 @@ Object.defineProperties({ a: 1, b: 2 }, { a: {
 }}) // { a: 3, b: 2 }
 // syntax
 Object.defineProperties(obj, props)
+
+Object.defineProperties(user, {
+  name: { value: "John", writable: false },
+  surname: { value: "Smith", writable: false },
+  // ...
+});
+
+let user = {
+  name: "John",
+  toString() {
+    return this.name;
+  }
+};
+// By default, both our properties are listed:
+for (let key in user) alert(key); // name, toString
 ```
 **Object.defineProperty()**
-defines new or modifies existing property
+defines new or modifies existing property. If the property exists, defineProperty updates its flags. Otherwise, it creates the property with the given value and flags; in that case, if a flag is not supplied, it is assumed false. Compare it with “normally created” user.name above: now all flags are falsy.
  
 ```javascript
 // example
@@ -461,7 +512,7 @@ Object.getOwnPropertyDescriptor(obj, 'a') // { value: 1, writable: true, enumera
 Object.getOwnPropertyDescriptor(obj, prop)
 ```
 **Object.getOwnPropertyDescriptors()**
-returns all own property descriptors including symbolic and non-enumerable ones.
+returns all own property descriptors including symbolic and non-enumerable ones. Together with Object.defineProperties it can be used as a “flags-aware” way of cloning an object:
  
 ```javascript
 // example
@@ -516,6 +567,10 @@ Object.is('a', 'a') // true
 // syntax
 Object.is(value1, value2)
 ```
+
+**Sealing an object globally**
+Property descriptors work at the level of individual properties. There are also methods that limit access to the whole object like below
+
 **Object.isExtensible()**
 determines wether an object can have new properties added to it
  
