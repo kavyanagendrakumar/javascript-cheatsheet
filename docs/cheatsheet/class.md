@@ -285,11 +285,17 @@ Built-in classes like Array, Map and others are extendable also.
 ```
 Built-in methods like filter, map and others – return new objects of exactly the inherited type PowerArray. Their internal implementation uses the object’s constructor property for that. When arr.filter() is called, it internally creates the new array of results using exactly arr.constructor, not basic Array. 
 When you access arr.constructor, JavaScript does the following:
+
 1.Look for constructor directly on arr
+
 2. arr.hasOwnProperty('constructor') → false
-3. Not found? Then go to arr.__proto__
-4. This is PowerArray.prototype
-5. Check PowerArray.prototype.constructor
+3. 
+4. Not found? Then go to arr.__proto__
+5. 
+6. This is PowerArray.prototype
+7. 
+8. Check PowerArray.prototype.constructor
+9. 
 Found! It points to PowerArray
 
 We can add a special static getter **Symbol.species** to the class. If it exists, it should return the constructor that JavaScript will use internally to create new entities in map, filter and so on. If we’d like built-in methods like map or filter to return regular arrays, we can return Array in Symbol.species. Other collections, such as Map and Set, work alike. They also use Symbol.species.
