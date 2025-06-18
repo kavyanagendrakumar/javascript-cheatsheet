@@ -287,10 +287,15 @@ Built-in methods like filter, map and others – return new objects of exactly t
 When you access arr.constructor, JavaScript does the following:
 
 1.Look for constructor directly on arr
+
 2. arr.hasOwnProperty('constructor') → false
+   
 4. Not found? Then go to arr.__proto__
+   
 6. This is PowerArray.prototype
+   
 8. Check PowerArray.prototype.constructor
+   
 Found! It points to PowerArray
 
 We can add a special static getter **Symbol.species** to the class. If it exists, it should return the constructor that JavaScript will use internally to create new entities in map, filter and so on. If we’d like built-in methods like map or filter to return regular arrays, we can return Array in Symbol.species. Other collections, such as Map and Set, work alike. They also use Symbol.species.
