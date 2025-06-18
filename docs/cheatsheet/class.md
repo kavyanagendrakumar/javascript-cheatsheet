@@ -292,7 +292,7 @@ When you access arr.constructor, JavaScript does the following:
 5. Check PowerArray.prototype.constructor
 Found! It points to PowerArray
 
-We can add a special static getter Symbol.species to the class. If it exists, it should return the constructor that JavaScript will use internally to create new entities in map, filter and so on. If we’d like built-in methods like map or filter to return regular arrays, we can return Array in Symbol.species. Other collections, such as Map and Set, work alike. They also use Symbol.species.
+We can add a special static getter **Symbol.species** to the class. If it exists, it should return the constructor that JavaScript will use internally to create new entities in map, filter and so on. If we’d like built-in methods like map or filter to return regular arrays, we can return Array in Symbol.species. Other collections, such as Map and Set, work alike. They also use Symbol.species.
 ```javascript
   class PowerArray extends Array {
     isEmpty() {
@@ -313,4 +313,7 @@ We can add a special static getter Symbol.species to the class. If it exists, it
 **No static inheritance in built-ins**
 Built-in objects have their own static methods, for instance Object.keys, Array.isArray etc. But built-in classes are an exception. **They don’t inherit statics from each other.**
 For example, both Array and Date inherit from Object, so their instances have methods from Object.prototype. But Array.[[Prototype]] does not reference Object, so there’s no, for instance, Array.keys() (or Date.keys()) static method. there’s no link between Date and Object. They are independent, only Date.prototype inherits from Object.prototype. That’s an important difference of inheritance between built-in objects compared to what we get with extends.
+
+## Class checking: "instanceof"
+The instanceof operator allows to check whether an object belongs to a certain class. It also takes inheritance into account. Such a check may be necessary in many cases. For example, it can be used for building a **polymorphic function**, the one that treats arguments differently depending on their type.
 
