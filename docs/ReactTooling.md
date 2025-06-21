@@ -14,9 +14,13 @@ Solution: copy NVM init lines into .zshrc
 
 You can open **host file** with command cat /etc/hosts . cat command reads a file
 If "localhost" url is not working in browser, you can check if it is available in host file. If the entry for localhost is not present, localhost won't work. Add below to host file and save.
+
 127.0.0.1        localhost
+
 255.255.255.255  broadcasthost
+
 ::1              localhost
+
 
 **node terminal in vscode** - Node.js interactive shell, also called the Node REPL. You can also open a terminal in VS Code and type: node to open node terminal
 Now, you can:
