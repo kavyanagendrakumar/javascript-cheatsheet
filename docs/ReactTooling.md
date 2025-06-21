@@ -17,3 +17,19 @@ If "localhost" url is not working in browser, you can check if it is available i
 127.0.0.1        localhost
 255.255.255.255  broadcasthost
 ::1              localhost
+
+node terminal in vscode - Node.js interactive shell, also called the Node REPL. You can also open a terminal in VS Code and type: node to open node terminal
+Now, you can:
+
+Write and execute JavaScript one line at a time like in browser console.
+
+Test functions, variables, async code, etc.
+
+Use Node built-ins like fs, path, process
+
+| Feature      | Regular Terminal          | Node Terminal                |
+| ------------ | ------------------------- | ---------------------------- |
+| Shell type   | Bash / Zsh / PowerShell   | Node.js REPL                 |
+| Language     | Shell commands            | JavaScript                   |
+| Use case     | Running CLI commands, Git | Testing or exploring JS code |
+| How to start | Just open terminal        | Type `node` in terminal      |
