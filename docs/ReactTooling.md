@@ -6,7 +6,7 @@ Shells load different config files:
 
 Bash → .bashrc, .bash_profile
 
-Zsh → .zshrc
+Zsh → .zshrc. Your terminal behavior is configured via ~/.zshrc. Main config file for interactive use (where you add PATHs, aliases, plugins)
 
 If nvm is only in the Bash file, it won’t work in Zsh.
 
