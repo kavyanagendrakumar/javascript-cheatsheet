@@ -179,8 +179,85 @@ What happens when a regular error occurs and is not caught by try..catch? The sc
   }); // no catch to handle the error
 ```
 
-
+## Promise API
+There are 6 static methods in the Promise class.
+promises - Iterable(usually as array of promises)
+1. **Promise.all**(promises) – waits for all promises to resolve and returns a new promise. If it resolves, it returns an array of the results of promises. If any of the given promises rejects, it becomes the error of Promise.all, and all other results are ignored. order of the resulting array members is the same as in its source promises. Even though the first promise takes the longest time to resolve, it’s still first in the array of results. Promise.all(iterable) allows non-promise “regular” values in iterable. If any of those objects is not a promise, it’s passed to the resulting array “as is”
 ```javascript
+  // map every url to the promise of the fetch
+  let requests = urls.map(url => fetch(url));
+
+  // Promise.all waits until all jobs are resolved
+  Promise.all(requests)
+  .then(responses => responses.forEach(
+  response => alert(`${response.url}: ${response.status}`)
+  ));
 ```
+2. **Promise.allSettled**(promises) (recently added method. Old browsers may need polyfills.) – Promise.allSettled just waits for all promises to settle, regardless of the result. Returns a promise. The resulting array has:
+* {status:"fulfilled", value:result} for successful responses,
+* {status:"rejected", reason:error} for errors.
+  ```javascript
+    Promise.allSettled(urls.map(url => fetch(url)))
+      .then(results => { // (*)
+        results.forEach((result, num) => {
+        if (result.status == "fulfilled") {
+        alert(`${urls[num]}: ${result.value.status}`);
+      }
+      if (result.status == "rejected") {
+        alert(`${urls[num]}: ${result.reason}`);
+      }
+    });
+  });
+    //result
+    [
+      {status: 'fulfilled', value: ...response...},
+      {status: 'fulfilled', value: ...response...},
+      {status: 'rejected', reason: ...error object...}
+    ]
+
+  //Polyfill
+  if (!Promise.allSettled) {
+      const rejectHandler = reason => ({ status: 'rejected', reason });
+      const resolveHandler = value => ({ status: 'fulfilled', value });
+      Promise.allSettled = function (promises) {
+        // promises.map takes input values, turns them into promises (just in case a non-promise was passed) with p => Promise.resolve(p), and then adds .then handler to every one.
+        const convertedPromises = promises.map(p => Promise.resolve(p).then(resolveHandler, rejectHandler));
+        return Promise.all(convertedPromises);
+      };
+  }
+  ```
+3. **Promise.race**(promises) – waits for the **first promise to settle**, and its result/error becomes the outcome. After the first settled promise “wins the race”, all further results/errors are ignored.
+4. **Promise.any**(promises) (recently added method) – waits for the **first promise to fulfill**, and its result becomes the outcome. If all of the given promises are rejected, AggregateError becomes the error of Promise.any.
+  ```javascript
+    Promise.any([
+      new Promise((resolve, reject) => setTimeout(() => reject(new Error("Ouch!")), 1000)),
+      new Promise((resolve, reject) => setTimeout(() => reject(new Error("Error!")), 2000))
+    ]).catch(error => {
+      console.log(error.constructor.name); // AggregateError
+      console.log(error.errors[0]); // Error: Ouch!
+      console.log(error.errors[1]); // Error: Error!
+    });
+  ```
+5. **Promise.resolve**(value) – creates a resolved promise with the given value. The method is used for compatibility, when a function is expected to return a promise. Ex: For example, the loadCached function below fetches a URL and remembers (caches) its content. For future calls with the same URL it immediately gets the previous content from cache, but uses Promise.resolve to make a promise of it, so the returned value is always a promise:
+   ```javascript
+     let cache = new Map();
+      function loadCached(url) {
+      if (cache.has(url)) {
+        return Promise.resolve(cache.get(url)); // (*)
+      }
+      return fetch(url)
+        .then(response => response.text())
+        .then(text => {
+          cache.set(url,text);
+          return text;
+        });
+      }
+   ```
+6. **Promise.reject**(error) – creates a rejected promise with the given error.
+Of all these, Promise.all is probably the most common in practice. resolve and reject are rarely used. 
+
+## Promisification
+
+
 
 
