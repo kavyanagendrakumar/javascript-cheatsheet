@@ -78,7 +78,9 @@ Always runs when the promise is settled: be it resolve or reject. The idea of fi
 3. A finally handler also shouldn’t return anything. If it does, the returned value is silently ignored. The only exception to this rule is when a finally handler throws an error. Then this error goes to the next handler, instead of any previous outcome.
 
 Promises are more flexible. We can add handlers any time: if the result is already there, they just execute.
+
 **Promises vs Callbacks**
+
 Promises                                                               
 1. Promises allow us to do things in the natural order. First, we run loadScript(script) , and .then we write what to do with the result.
 2. We can call .then on a Promise as many times as we want. Each time, we’re adding a new “fan”, a new subscribing function, to the “subscription list” - Promise Chaining
