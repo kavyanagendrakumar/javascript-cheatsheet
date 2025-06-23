@@ -285,9 +285,9 @@ Of all these, Promise.all is probably the most common in practice. resolve and r
         });
       };
     }
-    // usage:
-    let loadScriptPromise = promisify(loadScript);
-    loadScriptPromise(...).then(...);
+  // usage:
+  let loadScriptPromise = promisify(loadScript);
+  loadScriptPromise(...).then(...);
 ```
 Note : Remember, a promise may have only one result, but a callback may technically be called many times. So promisification is only meant for functions that call the callback once. Further calls will be ignored.
 
