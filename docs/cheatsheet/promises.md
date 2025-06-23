@@ -321,9 +321,9 @@ Like promise.then, await allows us to use thenable objects. if it supports .then
 **Async class methods**
 To declare an async class method, just prepend it with async:
 ```javascript
-  class Waiter {
+class Waiter {
     async wait() {
-    return await Promise.resolve(1);
+      return await Promise.resolve(1);
     }
   }
 new Waiter()
