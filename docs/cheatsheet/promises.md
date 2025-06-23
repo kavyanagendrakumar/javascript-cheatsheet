@@ -291,5 +291,15 @@ Of all these, Promise.all is probably the most common in practice. resolve and r
 ```
 Note : Remember, a promise may have only one result, but a callback may technically be called many times. So promisification is only meant for functions that call the callback once. Further calls will be ignored.
 
+## Microtask Queue
+When a promise is ready, its .then/catch/finally handlers are put into the queue; they are not executed yet. When the JavaScript engine becomes free from the current code, it takes a task from the queue and executes it.
+If there’s a chain with multiple .then/catch/finally, then every one of them is executed asynchronously. That is, it first gets queued, then executed when the current code is complete and previously queued handlers are finished.
 
-
+An “unhandled rejection” occurs when a promise error is not handled at the end of the microtask queue. 
+```javascript
+  let promise = Promise.reject(new Error("Promise Failed!"));
+  setTimeout(() => promise.catch(err => alert('caught')), 1000);
+  // Error: Promise Failed!
+  window.addEventListener('unhandledrejection', event => alert(event.reason));
+```
+if we run it, we’ll see Promise Failed! first and then caught. If we didn’t know about the microtasks queue, we could wonder: “Why did unhandledrejection handler run? We did catch and handle the error!” But now we understand that unhandledrejection is generated when the microtask queue is complete: the engine examines promises and, if any of them is in the “rejected” state, then the event triggers. In the example above, .catch added by setTimeout also triggers. But it does so later, after unhandledrejection has already occurred, so it doesn’t change anything.
