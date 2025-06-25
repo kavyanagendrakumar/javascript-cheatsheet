@@ -596,6 +596,52 @@ All built-in objects follow the same pattern:
 1. The methods are stored in the prototype ( Array.prototype, Object.prototype, Date.prototype, etc.)
 2. The object itself stores only the data (array items, object properties, the date)
 
+## Variable scope, closure 
+Read this(important) - https://javascript.info/closure 
+JavaScript is a very function-oriented language. 
+
+**Closure** - Usually, a function remembers where it was born(created) in the special property [[Environment]]. It references the Lexical Environment from where it’s created. 
+
+**Function Creation**
+When a function is created, it remembers the lexical environemtn it was created in and stores in internal property called [[Environment]]
+
+**Function Runtime**
+When a function is executing, before it executes, a lexical environment is created for it's execution. 
+Lexical Env has 
+1. Environment record - which contains local variables, this.
+2. Pointer to Outer Lexical environment which it gets when it's created([[Environment]]). 
+
+## For loop
+For generates a new lexical environment with it's own variable. So, function generated inside for loop in every iteration refrences it's own i, from that very iteration. (Remember this for closures)
+
 ## Currying
 Currying is a transformation of functions that translates a function from callable as f(a, b, c) into callable as f(a)(b)(c).Currying doesn’t call a function. It just transforms it.
+**Use cases** - To create partially applied function
+1. The result of curry(func) is a wrapper function(a).
+2. When it is called like curriedSum(1), the argument is saved in the Lexical Environment, and a new wrapper is returned function(b).
+Then this wrapper is called with 2 as an argument, and it passes the call to the original sum.
+
+_.curry from lodash library return a wrapper that allows a function to be called both normally and partially. The currying requires the function to have a fixed number of arguments. A function that uses rest parameters, such as f(...args), can’t be curried this way.
+```javascript
+  function curry(func) {
+    return function curried(...args) {
+      if (args.length >= func.length) {
+        return func.apply(this, args);
+      } else {
+        return function(...args2) {
+        return curried.apply(this, args.concat(args2));
+        }
+      }
+    };
+}
+
+//Example
+function log(date, importance, message) {
+  alert(`[${date.getHours()}:${date.getMinutes()}] [${importance}] ${message}`);
+}
+// logNow will be the partial of log with fixed first argument
+let logNow = log(new Date());
+// use it
+logNow("INFO", "message"); // [HH:mm] INFO message
+```
 
