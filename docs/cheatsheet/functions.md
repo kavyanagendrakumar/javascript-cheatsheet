@@ -565,7 +565,7 @@ Some methods in prototypes may overlap, for instance, Array.prototype has its ow
   };
   "BOOM!".show(); // BOOM!
 ```
-Changing native prototypes - Native prototypes can be modified. For instance, if we add a method to String.prototype, it becomes available to all strings. But that is generally a bad idea. Prototypes are global, so it’s easy to get a conflict. If two libraries add a method String.prototype.show, then one of them will be overwriting the method of the other. In modern programming, there is only one case where modifying native prototypes is approved. That’s polyfilling. Polyfilling is a term for making a substitute for a method that exists in the JavaScript specification, but is not yet supported by a particular JavaScript engine
+Changing native prototypes - Native prototypes can be modified. For instance, if we add a method to String.prototype, it becomes available to all strings. But that is generally a bad idea. Prototypes are global, so it’s easy to get a conflict. If two libraries add a method String.prototype.show, then one of them will be overwriting the method of the other. In modern programming, there is only one case where modifying native prototypes is approved. That’s polyfilling. **Polyfill**ing is a term for making a substitute for a method that exists in the JavaScript specification, but is not yet supported by a particular JavaScript engine
 ```javascript
   if (!String.prototype.repeat) { // if there's no such method
   // add it to the prototype
