@@ -596,5 +596,6 @@ All built-in objects follow the same pattern:
 1. The methods are stored in the prototype ( Array.prototype, Object.prototype, Date.prototype, etc.)
 2. The object itself stores only the data (array items, object properties, the date)
 
-
+## Currying
+Currying is a transformation of functions that translates a function from callable as f(a, b, c) into callable as f(a)(b)(c).Currying doesn’t call a function. It just transforms it.
 
