@@ -629,7 +629,7 @@ _.curry from lodash library return a wrapper that allows a function to be called
         return func.apply(this, args);
       } else {
         return function(...args2) {
-        return curried.apply(this, args.concat(args2));
+          return curried.apply(this, args.concat(args2));
         }
       }
     };
