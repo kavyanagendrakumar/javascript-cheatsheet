@@ -898,7 +898,51 @@ objectName.sayMyAge();   // "Bonjour Mathieu."
 ```
 
 ## Proxy
-A Proxy object wraps another object and intercepts operations, like reading/writing properties and others, optionally handling them on its own, or transparently allowing the object to handle them.
+This is an introduction. More in https://javascript.info/proxy 
+A Proxy object wraps another object and intercepts operations, like reading/writing properties and others, optionally handling them on its own, or transparently allowing the object to handle them. For operations on proxy, if there’s a corresponding trap in handler, then it runs, and the proxy has a chance to handle it, otherwise the operation is performed on target. Proxy is a special “exotic object”. It doesn’t have own properties. With an empty handler it transparently forwards operations to target.
+
+What can we intercept with them?
+For most operations on objects, there’s a so-called “internal method” in the JavaScript specification that describes how it works at the lowest level. For instance [[Get]], the internal method to read a property, [[Set]], the internal method to write a property, and so on. These methods are only used in the specification, we can’t call them directly by name. Proxy traps intercept invocations of these methods. 
+
+Refer https://javascript.info/proxy for internal methods and handlers for proxy
+**Use cases**
+1. The most common traps are for reading/writing properties.
 ```javascript
-  
+  let proxy = new Proxy(target, handler) // handler - an object with “traps”, methods that intercept operations.
+
+//get trap - get(target, property, receiver)
+let numbers = [0, 1, 2];
+numbers = new Proxy(numbers, { //Please note how the proxy overwrites the variable: The proxy should totally replace the target object everywhere. No one should ever reference the target object after it got
+proxied. Otherwise it’s easy to mess up.
+  get(target, prop) {
+    if (prop in target) {
+      return target[prop];
+    } else {
+      return 0; // default value
+    }
+  }
+});
+alert( numbers[1] ); // 1
+alert( numbers[123] ); // 0 (no such item)
+
+//set trap - set(target, property, value, receiver). Don’t forget to return true. [[Set]] must return true if the value was written successfully, otherwise false.
+numbers = new Proxy(numbers, { // (*)
+  set(target, prop, val) { // to intercept property writing
+    if (typeof val == 'number') {
+      target[prop] = val;
+      return true;
+    } else {
+      return false;
+    }
+  }
+});
+numbers.push(1); // added successfully
+numbers.push(2); // added successfully
+alert("Length is: " + numbers.length); // 2
 ```
+Please note: the built-in functionality of arrays is still working! Values are added by push. The length property auto-increases when values are added. Our proxy doesn’t break anything. We don’t have to override value-adding array methods like push and unshift, and so on, to add checks in there, because internally they use the [[Set]] operation that’s intercepted by the proxy.
+
+![Uploading Screenshot 2025-06-25 at 8.52.16 PM.png…]()
+
+## Reflect
+Reflect is a built-in object that simplifies creation of Proxy.
