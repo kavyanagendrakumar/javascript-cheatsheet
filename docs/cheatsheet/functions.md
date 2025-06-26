@@ -416,6 +416,8 @@ There’s only a subtle difference regarding args:
 1. The spread syntax ... allows to pass iterable args as the list to call.
 2. The apply accepts only array-like args.
 
+Both Function.prototype.call() and Function.prototype.apply() invoke the function immediately.
+
 ## Method Borrowing
 ```javascript
   function hash() {
