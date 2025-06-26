@@ -896,3 +896,9 @@ objectName = {
 objectName.sayMyAge();   // "Bonjour Mathieu."
                         //  "I'm 25 years old."
 ```
+
+## Proxy
+A Proxy object wraps another object and intercepts operations, like reading/writing properties and others, optionally handling them on its own, or transparently allowing the object to handle them.
+```javascript
+  
+```
